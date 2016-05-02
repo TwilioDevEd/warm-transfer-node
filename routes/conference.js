@@ -4,7 +4,7 @@ var express = require('express')
 
 // POST: /conference/
 router.post('/wait/', function (req, res) {
-  res.send(twimlGenerator.waitResponse().toString());
+  res.send(twimlGenerator.generateWaitResponse().toString());
 });
 
 module.exports = router;
