@@ -1,13 +1,13 @@
 var expect = require('chai').expect
   , supertest = require('supertest')
   , cheerio = require('cheerio')
-  , app = require('../app.js');
+  , app = require('../../app.js');
 
-describe('agents', function () {
+describe('conference route', function () {
   describe('POST /conference/wait/', function () {
     it('responds with say & play', function (done) {
-      var agent = supertest(app);
-      agent
+      var testApp = supertest(app);
+      testApp
         .post('/conference/wait')
         .expect(function (res) {
           var $ = cheerio.load(res.text);
