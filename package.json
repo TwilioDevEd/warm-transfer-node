@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "export NODE_ENV=test"
+    "test": "export NODE_ENV=test && mocha spec"
   },
   "description": "Warm Transfer: Transfer support calls from one agent to another using Twilio, Node.js and Express",
   "author": {
