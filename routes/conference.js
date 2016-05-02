@@ -1,6 +1,6 @@
 var express = require('express')
   , router = express.Router()
-  , twimlGenerator = require('../models/twiml-generator');
+  , twimlGenerator = require('../lib/twiml-generator');
 
 // POST: /conference/
 router.post('/wait/', function (req, res) {
