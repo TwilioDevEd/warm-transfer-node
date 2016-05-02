@@ -1,0 +1,49 @@
+{
+  "name": "warm-transfer-node",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "export NODE_ENV=test && mocha spec"
+  },
+  "description": "Warm Transfer: Transfer support calls from one agent to another using Twilio, Node.js and Express",
+  "author": {
+    "name": "Marcos Sampaio",
+    "email": "mosampaio@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TwilioDevEd/warm-transfer-node"
+  },
+  "keywords": [
+    "node",
+    "warm transfer",
+    "twilio",
+    "express",
+    "twiml",
+    "webhooks"
+  ],
+  "engines" : { "node" : ">=4.1.0 <5.5.0" },
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "body-parser": "~1.13.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-session": "^1.12.1",
+    "jade": "~1.11.0",
+    "kerberos": "~0.0.17",
+    "mongoose": "^4.3.1",
+    "mongoose-deep-populate": "^2.0.3",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0",
+    "twilio": "^2.8.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "cheerio": "^0.19.0",
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0"
+  }
+}
