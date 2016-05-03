@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var conferenceRouter = require('./routes/conference');
+var tokenRouter = require('./routes/token');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use('/conference', conferenceRouter);
+app.use('/token', tokenRouter);
 
 
 // catch 404 and forward to error handler
