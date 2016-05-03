@@ -38,4 +38,23 @@ describe('conference route', function () {
     });
   });
 
+  describe('POST /conference/connectAgent2/', function () {
+    it('responds with twiml to connect agent 2', function (done) {
+      var testApp = supertest(app);
+      testApp
+        .post('/conference/connectAgent2')
+        .send({
+          conferenceId: 'conference-id2'
+        })
+        .expect(function (res) {
+          var $ = cheerio.load(res.text);
+          expect($('Response Dial Conference').text()).to.equal('conference-id2');
+          expect($('Response Dial Conference[waitUrl="http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical"]').length).to.equal(1);
+          expect($('Response Dial Conference[startConferenceOnEnter="true"]').length).to.equal(1);
+          expect($('Response Dial Conference[endConferenceOnExit="true"]').length).to.equal(1);
+        })
+      .expect(200, done);
+    });
+  });
+
 });

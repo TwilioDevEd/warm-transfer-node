@@ -15,4 +15,11 @@ router.post('/connectAgent1/', function (req, res) {
     .toString());
 });
 
+router.post('/connectAgent2/', function (req, res) {
+  res.send(twimlGenerator
+    .generateCnnectConferenceResponse(req.body['conferenceId'], AGENT_WAIT_URL, true, true)
+    .toString());
+});
+
+
 module.exports = router;
