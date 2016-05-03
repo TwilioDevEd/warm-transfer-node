@@ -1,7 +1,9 @@
 var expect = require('chai').expect
   , supertest = require('supertest')
   , cheerio = require('cheerio')
-  , app = require('../../app.js');
+  , app = require('../../app.js')
+  , Call = require('../../models/call')
+  , mongoose = require('mongoose');
 
 describe('conference route', function () {
 
@@ -56,5 +58,33 @@ describe('conference route', function () {
       .expect(200, done);
     });
   });
+
+  // describe('POST /conference/connectClient/', function () {
+
+  //   before(function (done) {
+  //     var dbURI = 'mongodb://localhost/warm-transfer';
+  //     mongoose.connect(dbURI, function(err) {
+  //       if (err) throw err;
+  //       Call.remove({}, done);  
+  //     });
+
+  //   });
+
+  //   it('should persist the call in database', function (done) {
+  //     var testApp = supertest(app);
+  //     testApp
+  //       .post('/conference/connectClient')
+  //       .send({
+  //         callSid: 'conference-id'
+  //       })
+  //       .expect(function (res) {
+  //         Call.findOne({}, function(err, agents) {
+  //           console.log(agents);
+  //           done();
+  //         });
+  //         done();
+  //     });
+  //   });
+  // });
 
 });
