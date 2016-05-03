@@ -1,23 +1,21 @@
 var expect = require('chai').expect
   , app = require('../../app.js')
   , twimlGenerator = require('../../lib/twiml-generator')
-  , parser = require('xml2json');
+  , cheerio = require('cheerio');
 
 describe('twiml-generator', function () {
 
   describe('#generateCnnectConferenceResponse', function () {
     it('responds with proper twiml', function () {
       var twimlResponse = twimlGenerator.generateCnnectConferenceResponse('conference-id', 'wait-url', true, false);
-      var jsonResponse = JSON.parse(parser.toJson(twimlResponse.toString()));
-      
-      expect(jsonResponse).to.have.property('Response');
-      expect(jsonResponse['Response']).to.have.property('Dial');
-      expect(jsonResponse['Response']['Dial']).to.have.property('Conference');
-      expect(jsonResponse['Response']['Dial']['Conference']['waitUrl']).to.equal('wait-url');
-      expect(jsonResponse['Response']['Dial']['Conference']['startConferenceOnEnter']).to.equal('true');
-      expect(jsonResponse['Response']['Dial']['Conference']['endConferenceOnExit']).to.equal('false');
-      expect(jsonResponse['Response']['Dial']['Conference']['endConferenceOnExit']).to.equal('false');
-      expect(jsonResponse['Response']['Dial']['Conference']['$t']).to.equal('conference-id');
+      console.log(twimlResponse.toString());
+      var $ = cheerio.load(twimlResponse.toString());
+      expect($('Response Dial Conference').text()).to.equal('conference-id');
+      expect($('Response Dial Conference[waitUrl="wait-url"]').length).to.equal(1);
+      expect($('Response Dial Conference[startConferenceOnEnter="true"]').length).to.equal(1);
+      expect($('Response Dial Conference[startConferenceOnEnter="false"]').length).to.equal(0);
+      expect($('Response Dial Conference[endConferenceOnExit="false"]').length).to.equal(1);
+      expect($('Response Dial Conference[endConferenceOnExit="true"]').length).to.equal(0);
     });
   });
 
