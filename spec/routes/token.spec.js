@@ -5,7 +5,7 @@ var expect = require('chai').expect
 
 describe('token route', function () {
   describe('POST /token/agent1/', function () {
-    it.only('responds with token', function (done) {
+    it('responds with token', function (done) {
       var testApp = supertest(app);
       testApp
         .post('/token/agent1')
