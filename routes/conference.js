@@ -21,19 +21,19 @@ router.post('/wait/', function (req, res) {
   res.send(twimlGenerator.generateWaitResponse().toString());
 });
 
-router.post('/connectAgent1/', function (req, res) {
+router.post('/:conferenceId/connect/agent1/', function (req, res) {
   res.send(twimlGenerator
-    .generateCnnectConferenceResponse(req.body['conferenceId'], AGENT_WAIT_URL, true, false)
+    .generateCnnectConferenceResponse(req.params['conferenceId'], AGENT_WAIT_URL, true, false)
     .toString());
 });
 
-router.post('/connectAgent2/', function (req, res) {
+router.post('/:conferenceId/connect/agent2/', function (req, res) {
   res.send(twimlGenerator
-    .generateCnnectConferenceResponse(req.body['conferenceId'], AGENT_WAIT_URL, true, true)
+    .generateCnnectConferenceResponse(req.params['conferenceId'], AGENT_WAIT_URL, true, true)
     .toString());
 });
 
-router.post('/connectClient', function (req, res) {
+router.post('/connect/client/', function (req, res) {
   var conferenceId = req.body['callSid'];
   var agentOne = 'agent1';
   var callbackUrl = connectConferenceUrl(req, agentOne, conferenceId);

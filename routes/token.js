@@ -3,8 +3,11 @@ var express = require('express')
   , twilioCapabilityGenerator = require('../lib/twilio-capability-generator');
 
 // POST: /token/
-router.post('/generate/', function (req, res) {
-  res.send(twilioCapabilityGenerator());
+router.post('/:agentId/', function (req, res) {
+  res.send({
+    token: twilioCapabilityGenerator(),
+    agentId: req.params['agentId']
+  });
 });
 
 module.exports = router;

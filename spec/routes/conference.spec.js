@@ -24,14 +24,11 @@ describe('conference route', function () {
     });
   });
 
-  describe('POST /conference/connectAgent1/', function () {
+  describe('POST /conference/conference-id1/connect/agent1', function () {
     it('responds with twiml to connect agent 1', function (done) {
       var testApp = supertest(app);
       testApp
-        .post('/conference/connectAgent1')
-        .send({
-          conferenceId: 'conference-id1'
-        })
+        .post('/conference/conference-id1/connect/agent1')
         .expect(function (res) {
           var $ = cheerio.load(res.text);
           expect($('Response Dial Conference').text()).to.equal('conference-id1');
@@ -43,14 +40,11 @@ describe('conference route', function () {
     });
   });
 
-  describe('POST /conference/connectAgent2/', function () {
+  describe('POST /conference/conference-id2/connect/agent2', function () {
     it('responds with twiml to connect agent 2', function (done) {
       var testApp = supertest(app);
       testApp
-        .post('/conference/connectAgent2')
-        .send({
-          conferenceId: 'conference-id2'
-        })
+        .post('/conference/conference-id2/connect/agent2')
         .expect(function (res) {
           var $ = cheerio.load(res.text);
           expect($('Response Dial Conference').text()).to.equal('conference-id2');
@@ -62,7 +56,7 @@ describe('conference route', function () {
     });
   });
 
-  describe('POST /conference/connectClient/', function () {
+  describe('POST /conference/connect/client/', function () {
 
     before(function (done) {
       twilioCaller = sinon.mock(twilioCaller);
@@ -78,7 +72,7 @@ describe('conference route', function () {
 
       var testApp = supertest(app);
       testApp
-      .post('/conference/connectClient')
+      .post('/conference/connect/client')
       .send({
         callSid: 'conference-id'
       })
@@ -93,7 +87,7 @@ describe('conference route', function () {
     it('should persist the call in database', function (done) {
       var testApp = supertest(app);
       testApp
-      .post('/conference/connectClient')
+      .post('/conference/connect/client')
       .send({
         callSid: 'conference-id'
       })
@@ -113,7 +107,7 @@ describe('conference route', function () {
       }, function(){
         var testApp = supertest(app);
         testApp
-        .post('/conference/connectClient')
+        .post('/conference/connect/client')
         .send({
           callSid: 'conference-id'
         })
@@ -132,7 +126,7 @@ describe('conference route', function () {
     it('should generate twiml response', function (done) {
       var testApp = supertest(app);
       testApp
-      .post('/conference/connectClient')
+      .post('/conference/connect/client')
       .send({
         callSid: 'conference-id'
       })
