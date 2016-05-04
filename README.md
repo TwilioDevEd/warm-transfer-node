@@ -56,7 +56,7 @@
   You will also need to configure Twilio to call your application when calls are received on your `TWILIO_NUMBER`. The voice url should look something like this:
 
   ```
-  http://<your-ngrok-subdomain>.ngrok.io/Conference/ConnectClient
+  http://<your-ngrok-subdomain>.ngrok.io/conference/connect/client
   ```
 
   ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
