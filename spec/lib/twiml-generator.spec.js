@@ -5,9 +5,14 @@ var expect = require('chai').expect
 
 describe('twiml-generator', function () {
 
-  describe('#generateCnnectConferenceResponse', function () {
+  describe('#connectConferenceTwiml', function () {
     it('responds with proper twiml', function () {
-      var twimlResponse = twimlGenerator.generateCnnectConferenceResponse('conference-id', 'wait-url', true, false);
+      var twimlResponse = twimlGenerator.connectConferenceTwiml({
+          conferenceId:'conference-id', 
+          waitUrl: 'wait-url', 
+          startConferenceOnEnter: true, 
+          endConferenceOnExit: false
+      });
       var $ = cheerio.load(twimlResponse.toString());
       expect($('Response Dial Conference').text()).to.equal('conference-id');
       expect($('Response Dial Conference[waitUrl="wait-url"]').length).to.equal(1);
@@ -18,9 +23,9 @@ describe('twiml-generator', function () {
     });
   });
 
-  describe('#waitResponse', function () {
+  describe('#waitResponseTwiml', function () {
     it('responds with say & play', function () {
-      var twimlResponse = twimlGenerator.generateWaitResponse();
+      var twimlResponse = twimlGenerator.waitResponseTwiml();
       var $ = cheerio.load(twimlResponse.toString());
       expect($('Play').length).to.equal(1);
       expect($('Say').length).to.equal(1);

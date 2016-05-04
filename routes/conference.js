@@ -5,7 +5,6 @@ var express = require('express')
   , url = require('url')
   , twilioCaller = require('../lib/twilio-caller');
 
-// POST: /conference/
 var AGENT_WAIT_URL = "http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical";
 
 var connectConferenceUrl = function(req, agentId, conferenceId) {
@@ -18,19 +17,27 @@ var connectConferenceUrl = function(req, agentId, conferenceId) {
 };
 
 router.post('/wait/', function (req, res) {
-  res.send(twimlGenerator.generateWaitResponse().toString());
+  res.send(twimlGenerator.waitResponseTwiml().toString());
 });
 
 router.post('/:conferenceId/connect/agent1/', function (req, res) {
-  res.send(twimlGenerator
-    .generateCnnectConferenceResponse(req.params['conferenceId'], AGENT_WAIT_URL, true, false)
-    .toString());
+  res.send(twimlGenerator.connectConferenceTwiml({
+    conferenceId:req.params['conferenceId'],
+    waitUrl: AGENT_WAIT_URL, 
+    startConferenceOnEnter: true, 
+    endConferenceOnExit: false
+  })
+  .toString());
 });
 
 router.post('/:conferenceId/connect/agent2/', function (req, res) {
-  res.send(twimlGenerator
-    .generateCnnectConferenceResponse(req.params['conferenceId'], AGENT_WAIT_URL, true, true)
-    .toString());
+  res.send(twimlGenerator.connectConferenceTwiml({
+    conferenceId:req.params['conferenceId'],
+    waitUrl: AGENT_WAIT_URL, 
+    startConferenceOnEnter: true, 
+    endConferenceOnExit: true
+  })
+  .toString());
 });
 
 router.post('/connect/client/', function (req, res) {
@@ -46,17 +53,20 @@ router.post('/connect/client/', function (req, res) {
     },
     {
       agentId: agentOne,
-      conferenceId: req.body['conferenceId']
+      conferenceId: conferenceId
     },
     {
       upsert: true
     })
-    .then(function(err, doc){
-      res.send(twimlGenerator
-        .generateCnnectConferenceResponse(conferenceId, AGENT_WAIT_URL, false, true)
-        .toString());
-    }
-  );
+  .then(function(err, doc){
+    res.send(twimlGenerator.connectConferenceTwiml({
+      conferenceId:conferenceId,
+      waitUrl: AGENT_WAIT_URL, 
+      startConferenceOnEnter: false,
+      endConferenceOnExit: true
+    })
+    .toString());
+  });
 });
 
 module.exports = router;
