@@ -62,7 +62,10 @@ describe('conference route', function () {
   describe('POST /conference/connectClient/', function () {
 
     before(function (done) {
-      mongoose.connect(require('../../lib/db-connection')());
+      mongoose.connect(require('../../lib/db-connection')(), done);
+    });
+
+    beforeEach(function (done) {
       Call.remove({}, done);
     });
 
@@ -88,25 +91,26 @@ describe('conference route', function () {
     });
 
     it('should not create a new document when call already exists in database', function (done) {
-      var testApp = supertest(app);
-      testApp
-      .post('/conference/connectClient')
-      .send({
-        callSid: 'conference-id'
-      })
-      .expect(function (res) {
-        Call.find({}, function(err, calls) {
-          expect(calls.length).to.equal(1);
-        });
-      })
-      .end(function(err, res) {
-        if (err) {
-          throw err;
-        }
+      Call.create({
+        agentId: 'agent1',
+        conferenceId: 'conference-id',
+      }, function(){
+        var testApp = supertest(app);
+        testApp
+        .post('/conference/connectClient')
+        .send({
+          callSid: 'conference-id'
+        })
+        .expect(200)
+        .end(function (err, res) {
+          if (err) return done(err);
 
-        done();
+          Call.find({}, function(err, calls) {
+            expect(calls.length).to.equal(1);
+            done();
+          });
+        })
       });
     });
   });
-
 });

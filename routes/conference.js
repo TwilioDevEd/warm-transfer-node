@@ -23,12 +23,22 @@ router.post('/connectAgent2/', function (req, res) {
 });
 
 router.post('/connectClient', function (req, res) {
-  Call.create({
-    conferenceId: 'conference-id'
-  }).then(function () {
-    res.send('');
-  });
+  var agentOne = 'agent1';
+  Call.findOneAndUpdate(
+    {
+      agentId: agentOne
+    },
+    {
+      agentId: agentOne,
+      conferenceId: req.body['conferenceId']
+    },
+    {
+      upsert: true
+    })
+    .then(function(err, doc){
+      res.send('');
+    }
+  );
 });
-
 
 module.exports = router;
