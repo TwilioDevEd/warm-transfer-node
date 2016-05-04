@@ -40,12 +40,14 @@
     "mongoose-deep-populate": "^2.0.3",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "twilio": "^2.8.0"
+    "twilio": "^2.8.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",
     "cheerio": "^0.19.0",
     "mocha": "^2.3.4",
+    "sinon": "^1.17.4",
     "supertest": "^1.1.0"
   }
 }

@@ -3,7 +3,10 @@ var expect = require('chai').expect
   , cheerio = require('cheerio')
   , app = require('../../app.js')
   , Call = require('../../models/call')
-  , mongoose = require('mongoose');
+  , mongoose = require('mongoose')
+  , twilioCaller = require('../../lib/twilio-caller')
+  , sinon = require('sinon')
+  ;
 
 describe('conference route', function () {
 
@@ -62,11 +65,29 @@ describe('conference route', function () {
   describe('POST /conference/connectClient/', function () {
 
     before(function (done) {
+      twilioCaller = sinon.mock(twilioCaller);
       mongoose.connect(require('../../lib/db-connection')(), done);
     });
 
     beforeEach(function (done) {
       Call.remove({}, done);
+    });
+
+    it('should make a call', function (done) {
+      twilioCaller.expects("call").once();
+
+      var testApp = supertest(app);
+      testApp
+      .post('/conference/connectClient')
+      .send({
+        callSid: 'conference-id'
+      })
+      .expect(200)
+      .end(function(err, res) {
+        twilioCaller.verify();
+        done();
+      });
+
     });
 
     it('should persist the call in database', function (done) {
