@@ -76,17 +76,12 @@ describe('conference route', function () {
       .send({
         callSid: 'conference-id'
       })
-      .expect(function (res) {
+      .expect(200)
+      .end(function(err, res) {
         Call.find({}, function(err, calls) {
           expect(calls.length).to.equal(1);
+          done();
         });
-      })
-      .end(function(err, res) {
-        if (err) {
-          throw err;
-        }
-
-        done();
       });
     });
 
