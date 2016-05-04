@@ -63,6 +63,29 @@
 
 That's it!
 
+## How to Demo
+
+1. Navigate to `https://<your_ngrok_subdomain>.ngrok.io` in two different
+   browser tabs or windows.
+
+   **Notes:**
+   * Remember to use your SSL enabled ngrok url `https`.
+   Failing to do this won't allow you to receive incoming calls.
+   * The application has been tested with [Chrome](https://www.google.com/chrome/)
+   and [Firefox](https://firefox.com). Safari is not supported at the moment.
+
+1. In one window/tab click `Connect as Agent 1` and in the other one click
+   `Connect as Agent 2`. Now both agents are waiting for an incoming call.
+
+1. Dial your [Twilio Number]() to star a call with `Agent 1`. Your `TWILIO_NUMBER`
+   environment variable was set when configuring the application to run.
+
+1. When `Agent 1` answers the call from the client, he/she can dial `Agent 2` in
+   by clicking on the `Dial agent 2 in` button.
+
+1. Once `Agent 2` answers the call all three participants will have joined the same
+   call. After that `Agent 1` can drop the call and leave both the client and `Agent 2`
+   having a pleasant talk.
 
 ## Meta
 
