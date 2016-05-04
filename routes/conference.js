@@ -52,7 +52,9 @@ router.post('/connectClient', function (req, res) {
       upsert: true
     })
     .then(function(err, doc){
-      res.send('');
+      res.send(twimlGenerator
+        .generateCnnectConferenceResponse(conferenceId, AGENT_WAIT_URL, false, true)
+        .toString());
     }
   );
 });

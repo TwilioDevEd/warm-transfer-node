@@ -128,5 +128,22 @@ describe('conference route', function () {
         })
       });
     });
+
+    it('should generate twiml response', function (done) {
+      var testApp = supertest(app);
+      testApp
+      .post('/conference/connectClient')
+      .send({
+        callSid: 'conference-id'
+      })
+      .expect(function(res) {
+        var $ = cheerio.load(res.text);
+        expect($('Response Dial Conference').text()).to.equal('conference-id');
+        expect($('Response Dial Conference[waitUrl="http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical"]').length).to.equal(1);
+        expect($('Response Dial Conference[startConferenceOnEnter="false"]').length).to.equal(1);
+        expect($('Response Dial Conference[endConferenceOnExit="true"]').length).to.equal(1);
+      })
+      .expect(200, done);
+    });
   });
 });
