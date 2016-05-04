@@ -1,5 +1,48 @@
 extends layout
 
+block head
+  title.
+    Browser Calls
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='/stylesheets/main.css')
+  link(rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+  link(rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src='https://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+  <![endif]-->
+
+
 block content
-  h1= title
-  p Welcome to #{title}
+  div.row
+    div.panel.panel-info.client-controls
+      div.panel.panel-info.client-controls
+        div.panel-heading
+          h3.panel-title.
+            Support Agent Client
+        div.panel-body
+          p
+            strong.
+              Status
+          
+          div.well.well-sm#call-status.
+            Waiting for user to connect as an agent...
+
+          div.row#connect-agent-row
+            div.col-md-6.text-center
+              button#connect-agent1-button.btn.btn-lg.btn-primary.
+                Connect as Agent 1
+            div.col-md-6.text-center
+              button#connect-agent2-button.btn.btn-lg.btn-info.
+                Connect as Agent 2
+
+          div.row.hidden#connected-agent-row
+            div.col-md-4.text-center
+              button#answer-call-button.btn.btn-lg.btn-success(disabled="disabled").
+                Awswer call
+            div.col-md-4.text-center
+              button#dial-agent2-button.btn.btn-lg.btn-info.hidden(disabled="disabled").
+                Dial agent 2 in
+            div.col-md-4.text-center
+              button#hangup-call-button.btn.btn-lg.btn-danger(disabled="disabled").
+                Hangup

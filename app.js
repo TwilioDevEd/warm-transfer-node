@@ -23,6 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
+app.get('/', function (req, res) {
+  res.render('index');
+});
 app.use('/conference', conferenceRouter);
 app.use('/token', tokenRouter);
 

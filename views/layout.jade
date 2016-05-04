@@ -1,10 +1,25 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet' href='/stylesheets/style.css')
-    link(rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
-    link(rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    block head
   body
-    .container
-      block content
+    nav.navbar.navbar-default.navbar-static-top
+      div.container
+        div.navbar-header
+          button(type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/').
+            Warm Transfer Twilio
+        div.collapse.navbar-collapse#navbar
+          ul.nav.navbar-nav.navbar-right
+    div.container
+    block content
+    footer
+      | Made with <i class="fa fa-heart"></i> by your pals <a href="http://www.twilio.com">@twilio</a>
+
+    script(src='//code.jquery.com/jquery-2.1.4.min.js')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    script(src='////media.twiliocdn.com/sdk/js/client/v1.3/twilio.min.js')
+    script(src='javascripts/main.js')
