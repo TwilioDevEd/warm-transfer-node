@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('warm-transfer-node:server');
 var http = require('http');
 var mongoose = require('mongoose');
+var dbConnection = require('db-connection');
 
 /**
  * Get port from environment and store in Express.
@@ -91,5 +92,5 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-mongoose.connect('mongodb://localhost/warm-transfer');
+mongoose.connect(dbConnection());
 mongoose.Promise = require('bluebird');

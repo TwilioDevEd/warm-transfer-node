@@ -62,11 +62,8 @@ describe('conference route', function () {
   describe('POST /conference/connectClient/', function () {
 
     before(function (done) {
-      var dbURI = 'mongodb://localhost/wtt';
-      mongoose.connect(dbURI, function(err) {
-        if (err) throw err;
-        Call.remove({}, done);
-      });
+      mongoose.connect(require('../../lib/db-connection')());
+      Call.remove({}, done);
     });
 
     it('should persist the call in database', function (done) {
@@ -77,9 +74,29 @@ describe('conference route', function () {
         callSid: 'conference-id'
       })
       .expect(function (res) {
-        Call.find({}, function(err, agents) {
-          console.log(agents);
-          expect(agents.length).to.equal(1);
+        Call.find({}, function(err, calls) {
+          expect(calls.length).to.equal(1);
+        });
+      })
+      .end(function(err, res) {
+        if (err) {
+          throw err;
+        }
+
+        done();
+      });
+    });
+
+    it('should not create a new document when call already exists in database', function (done) {
+      var testApp = supertest(app);
+      testApp
+      .post('/conference/connectClient')
+      .send({
+        callSid: 'conference-id'
+      })
+      .expect(function (res) {
+        Call.find({}, function(err, calls) {
+          expect(calls.length).to.equal(1);
         });
       })
       .end(function(err, res) {
