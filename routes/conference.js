@@ -69,4 +69,14 @@ router.post('/connect/client/', function (req, res) {
   });
 });
 
+router.post('/:agentId/call/', function (req, res) {
+  var agentTwo = 'agent2';
+  Call.findOne({agentId: req.params['agentId']}, function (err, call) {
+    var callbackUrl = connectConferenceUrl(req, agentTwo, call.conferenceId);
+    twilioCaller.call(agentTwo, callbackUrl);
+    res.sendStatus(200);
+  });
+});
+
+
 module.exports = router;

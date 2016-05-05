@@ -159,4 +159,36 @@ describe('conference route', function () {
     });
   });
 
+  describe('POST /conference/agent2/call/', function () {
+
+    var twilioCallerMock =  sinon.mock(require('../../lib/twilio-caller'));
+
+    before(function (done) {
+      mockery.enable();
+      mockery.warnOnUnregistered(false);
+      mockery.registerMock('../../lib/twilio-caller', twilioCallerMock);
+      Call.create({
+        agentId: 'agent1',
+        conferenceId: 'conference-id50',
+      }, done);
+    });
+
+    after(function (done) {
+      mockery.deregisterMock('../../lib/twilio-caller');
+      mockery.disable();
+      done();
+    });
+
+    it('should make a call', function (done) {
+      twilioCallerMock.expects("call").once().withArgs('agent2', sinon.match.any);
+
+      var testApp = supertest(app);
+      testApp
+      .post('/conference/agent1/call')
+      .expect(function(res) {
+        twilioCallerMock.verify();
+      })
+      .expect(200, done)
+    });
+  });
 });
