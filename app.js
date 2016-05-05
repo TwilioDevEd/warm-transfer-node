@@ -1,3 +1,5 @@
+require('dotenv').config({silent: true});
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,7 +9,6 @@ var bodyParser = require('body-parser');
 
 var conferenceRouter = require('./routes/conference');
 var tokenRouter = require('./routes/token');
-
 var app = express();
 
 // view engine setup

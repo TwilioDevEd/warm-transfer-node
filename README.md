@@ -24,11 +24,15 @@
   $ npm test
   ```
 
-1. Edit the lib/config.js file to match your configuration.
+1. Copy the sample configuration file and edit it to match your configuration
+
+  ```bash
+  $ cp .env.example .env
+  ```
 
  You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
  [Twilio Account Settings](https://www.twilio.com/user/account/settings).
- You will also need a `TWILIO_NUMBER`, you may find it [here](https://www.twilio.com/user/account/phone-numbers/incoming).
+ You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/user/account/phone-numbers/incoming).
 
 1. Run the application.
   ```bash
