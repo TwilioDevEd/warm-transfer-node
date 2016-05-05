@@ -4,11 +4,19 @@ var expect = require('chai').expect
   , app = require('../../app.js')
   , Call = require('../../models/call')
   , mongoose = require('mongoose')
-  , twilioCaller = require('../../lib/twilio-caller')
   , sinon = require('sinon')
+  , mockery = require('mockery')
   ;
 
 describe('conference route', function () {
+
+  before(function (done) {
+    mongoose.connect(require('../../lib/db-connection')(), done);
+  });
+  
+  after(function (done) {
+    mongoose.disconnect(done);
+  });
 
   describe('POST /conference/wait/', function () {
     it('responds with say & play', function (done) {
@@ -58,9 +66,19 @@ describe('conference route', function () {
 
   describe('POST /conference/connect/client/', function () {
 
+    var twilioCallerMock =  sinon.mock(require('../../lib/twilio-caller'));
+
     before(function (done) {
-      twilioCaller = sinon.mock(twilioCaller);
-      mongoose.connect(require('../../lib/db-connection')(), done);
+      mockery.enable();
+      mockery.warnOnUnregistered(false);
+      mockery.registerMock('../../lib/twilio-caller', twilioCallerMock);
+      done();
+    });
+
+    after(function (done) {
+      mockery.deregisterMock('../../lib/twilio-caller');
+      mockery.disable();
+      done();
     });
 
     beforeEach(function (done) {
@@ -68,7 +86,7 @@ describe('conference route', function () {
     });
 
     it('should make a call', function (done) {
-      twilioCaller.expects("call").once();
+      twilioCallerMock.expects("call").once();
 
       var testApp = supertest(app);
       testApp
@@ -78,7 +96,7 @@ describe('conference route', function () {
       })
       .expect(200)
       .end(function(err, res) {
-        twilioCaller.verify();
+        twilioCallerMock.verify();
         done();
       });
 
@@ -140,4 +158,5 @@ describe('conference route', function () {
       .expect(200, done);
     });
   });
+
 });
