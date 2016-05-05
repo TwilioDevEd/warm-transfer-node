@@ -5,7 +5,7 @@ var express = require('express')
 // POST: /token/
 router.post('/:agentId/', function (req, res) {
   res.send({
-    token: twilioCapabilityGenerator(),
+    token: twilioCapabilityGenerator(req.params['agentId']),
     agentId: req.params['agentId']
   });
 });
