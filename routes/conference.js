@@ -44,7 +44,7 @@ router.post('/connect/client/', function (req, res) {
   var conferenceId = req.body['CallSid'];
   var agentOne = 'agent1';
   var callbackUrl = connectConferenceUrl(req, agentOne, conferenceId);
-  
+
   twilioCaller.call(agentOne, callbackUrl);
 
   Call.findOneAndUpdate(
