@@ -8,7 +8,7 @@ var express = require('express')
 var AGENT_WAIT_URL = "http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical";
 
 var connectConferenceUrl = function(req, agentId, conferenceId) {
-  var pathname = "/connect"+agentId;
+  var pathname = "/conference/"+conferenceId+"/connect/"+agentId;
   return url.format({
     protocol: req.protocol,
     host: req.get('host'),

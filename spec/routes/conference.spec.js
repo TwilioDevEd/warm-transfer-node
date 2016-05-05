@@ -86,7 +86,8 @@ describe('conference route', function () {
     });
 
     it('should make a call', function (done) {
-      twilioCallerMock.expects("call").once();
+      twilioCallerMock.expects("call").once().
+      withArgs('agent1', sinon.match(/http\:\/\/127.0.0.1\:\d+\/conference\/conference-id\/connect\/agent1/));
 
       var testApp = supertest(app);
       testApp
@@ -167,10 +168,7 @@ describe('conference route', function () {
       mockery.enable();
       mockery.warnOnUnregistered(false);
       mockery.registerMock('../../lib/twilio-caller', twilioCallerMock);
-      Call.create({
-        agentId: 'agent1',
-        conferenceId: 'conference-id50',
-      }, done);
+      done();
     });
 
     after(function (done) {
@@ -179,8 +177,20 @@ describe('conference route', function () {
       done();
     });
 
+    beforeEach(function (done) {
+      Call.remove({})
+      .then(function(){
+        Call.create({
+          agentId: 'agent1',
+          conferenceId: 'conference-id50',
+        });
+      })
+      .then(done);
+    });
+
     it('should make a call', function (done) {
-      twilioCallerMock.expects("call").once().withArgs('agent2', sinon.match.any);
+      twilioCallerMock.expects("call").once()
+      .withArgs('agent2', sinon.match(/http\:\/\/127.0.0.1\:\d+\/conference\/conference-id50\/connect\/agent2/));
 
       var testApp = supertest(app);
       testApp
