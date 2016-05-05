@@ -1,0 +1,209 @@
+.chapter(data-title='Setting Up The Application')
+  .step(
+    data-title='What Are We Building?',
+    data-file='app.js')
+    :markdown
+      ## Warm Transfer
+      ![Warm Transfer](//howtodocs.s3.amazonaws.com/warm-transfers.png)
+
+      Have you ever been disconnected from a support call while being transferred to
+      someone else?
+
+      Warm transfer eliminates this problem. Using Twilio powered
+      warm transfers your agents will have the ability
+      to dial in another agent in realtime.
+
+      Here is how it works at a high level:
+
+      1. The first agent becomes available when he/she connects through the web client.
+
+      1. The second agent also becomes available when he/she connects through the web client.
+
+      1. A client calls our support line.
+
+      1. The client stays on hold while the first agent joins the call.
+
+      1. While the first agent is on the phone with the client, he/she can dial a second agent into the call.
+
+      1. Once the second agent is on the call, the first one can disconnect from it.
+      The client and the second agent stay on the call.
+
+      Let's get started!
+
+      ---
+
+      **See Also:**
+      * [Installing Express](//expressjs.com/en/starter/installing.html)
+      * [The Twilio Node Helper Library](//twilio.github.io/twilio-node/)
+
+  .step(
+    data-title="Setting Up Voice Web Hook",
+    data-file='routes/conference.js',
+    data-highlight='43-43')
+    :markdown
+      ## Setting Up Voice Web Hook
+
+      First let's configure the voice webhook for the Twilio number that customers
+      will dial when they want to talk to a support agent.
+      ![Configure Voice](//howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
+
+      This should be the public-facing endpoint of your app in production.
+
+  .step(
+    data-title="Connecting as a Support Agent",
+    data-file='public/javascripts/main.js',
+    data-highlight='17-51')
+    :markdown
+      ## Connecting an Agent
+
+      Here you can see all front-end code necessary to connect an agent using
+      [Twilio's Voice Web Client](//www.twilio.com/webrtc).
+
+      We essentially need three things to have a live web client:
+      * A capability token (provided by our express app)
+      * A unique identifier (string) for each agent
+      * Event listeners to handle different Twilio-triggered events
+
+      In the next step we'll take a closer look into capability token
+      generation.
+
+      ---
+
+      **See also:**
+
+      * [Twilio.js Library](//www.twilio.com/docs/api/client/twilio-js)
+      * [Twilio Client Quickstart](//www.twilio.com/docs/quickstart/client)
+      * [TwiML response with the twilio-node library](//twilio.github.io/twilio-node/#twimlResponse)
+
+  .step(
+    data-title="Generate a Capability Token",
+    data-file='lib/twilio-capability-generator.js',
+    data-highlight='3-7')
+    :markdown
+      ## Generate a Capability Token
+
+      In order to connect the [Twilio Voice Web Client](//www.twilio.com/webrtc)
+      we need a [capability token](//www.twilio.com/docs/client/capability-tokens).
+
+      To allow incoming connections through the web client an identifier must
+      be provided when generating the token. For this tutorial we used fixed
+      identifier strings like `agent1` and `agent2` but you can use any
+      generated string for your call center clients. These identifiers will be
+      used to create outbound calls to the specified agent using the [Twilio
+      REST API](//www.twilio.com/docs/api/rest).
+
+      ---
+
+      **See also:**
+
+      * [Twilio Client: Capability Tokens](//www.twilio.com/docs/client/capability-tokens)
+      * [Generate Capability Tokens with twilio-node](//twilio.github.io/twilio-node/#capability)
+      * [Making Calls With Twilio REST API](//www.twilio.com/docs/api/rest/making-calls)
+
+  .step(
+    data-title="Handling Incoming Calls From Clients",
+    data-file='routes/conference.js',
+    data-highlight='43-70')
+    :markdown
+      ## Handling Incoming Calls
+
+      When a client makes a call to our Twilio number the application receives
+      a POST request asking for instructions. We'll use [TwiML](//www.twilio.com/docs/api/twiml/) to instruct the client
+      to join a conference room and the Twilio REST API client to start a call with
+      the first agent, so he can join the same conference.
+
+      When providing instructions to the client, we also provide a
+      [`waitUrl`](//www.twilio.com/docs/api/twiml/conference#attributes-waitUrl),
+      which in our case is another end point of our application. This returns more TwiML
+      to [say](//www.twilio.com/docs/api/twiml/say) welcome to the user, and also
+      [play](//www.twilio.com/docs/api/twiml/play) some music while on hold.
+      Take a look at the code
+      [here](//github.com/TwilioDevEd/warm-transfer-node/blob/master/lib/twiml-generator.js#L13-L17)
+
+      We use the client's [`CallSid`](//www.twilio.com/help/faq/voice/what-is-a-call-sid) as the conference identifier. Since all participants
+      need this identifier to join the conference we'll need to store it in a databse so that we can grab it when we dial the second agent in later.
+
+  .step(
+    data-title="Providing TwiML Instruction For The Client",
+    data-file='lib/twiml-generator.js',
+    data-highlight='3-11')
+    :markdown
+      ## Providing TwiML Instruction For The Client
+
+      Here we create a `TwiMLResponse` that will contain a
+      [`Dial`](//www.twilio.com/docs/api/twiml/dial) verb with a
+      [`Conference`](https://www.twilio.com/docs/api/twiml/conference) noun that
+      will instruct the client to join a specific conference room.
+
+  .step(
+    data-title='Dial First Agent Into the Call',
+    data-file='lib/twilio-caller.js')
+    :markdown
+      ## Dial First Agent Into the Call
+
+      For our app we created a `Caller` module to handle dialing our agents. This module uses
+      Twilio's REST API to create a new call. The `create` method
+      receives a hash with the following keys:
+
+      1. `from`: Your Twilio number
+
+      1. `to`  : The agent web client's identifier (`agent1` or `agent2`)
+
+      1. `url` : A url to ask for TwiML instructions when the call connects
+
+      Once the agent answers the call in the web client, a request is made to the
+      callback url instructing the agent's call to join the conference room where
+      the client is already waiting.
+
+  .step(
+    data-title='Dial Second Agent Into the Call',
+    data-file='routes/conference.js',
+    data-highlight='72-79')
+    :markdown
+      ## Dial Second Agent Into the Call
+
+      When the client and the first agent are both in the call we are ready to
+      perform a *warm  transfer* to a second agent. The first agent makes a
+      request passing its `identifier` to allow us to look for the `conference_id`
+      needed to dial the second agent in. Since we already have a `Caller` module we can simply use the `call_agent` instance method to connect the second agent.
+
+  .step(
+    data-title='The First Agent Leaves the Call',
+    data-file='lib/twiml-generator.js',
+    data-highlight='4-10')
+    :markdown
+      ## The First Agent Leaves the Call
+
+      When the three participants have joined the same call, the first agent has
+      served his purpose. Now he can drop the call, leaving agent two and the client
+      to have a pleasant conversation.
+
+      It is important to notice the differences between the TwiML each one of the
+      participants received when joining the call. Both, agent one and two, have
+      `startConferenceOnEnter` set to `true`. This means the conference will start when
+      any of them joins the call. For the client calling and for agent two, `endConferenceOnExit`
+      is set to true. This causes the call to end when either of these two participants
+      drop the call.
+
+  .step
+    :markdown
+      ## Where to next?
+
+      That's it! We have just implemented warm transfers using Node.js/Express.
+      Now your clients won't get disconnect from support calls while they are been
+      transferred to some else.
+
+      If you're a Node.js developer working with Twilio, you might also enjoy these
+      tutorials:
+
+      [**Browser-Calls**](//www.twilio.com/docs/tutorials/walkthrough/browser-calls/node/express)
+
+      Learn how to use Twilio Client to make browser-to-phone and browser-to-browser calls with ease.
+
+      [**ETA-Notifications**](//www.twilio.com/docs/tutorials/walkthrough/eta-notifications/node/express)
+
+      Learn how to implement ETA Notifications using Node.js/Express and Twilio.
+
+      Thanks for checking out this tutorial! If you have any feedback
+      to share with us, we'd love to hear it.
+      [Contact support](//www.twilio.com/help/contact) to let us know what you think.

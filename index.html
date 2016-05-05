@@ -1,0 +1,151 @@
+<!DOCTYPE html><html><head><title>Learn You warm-transfer-node For Much Win</title><style>body, html {
+  height:100%;
+  width:100%;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+  background-color:#ddd;
+}
+.wrapper {
+  height:100%;
+  width:100%;
+}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Learn You warm-transfer-node For Much Win"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Learn You warm-transfer-node For Much Win</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Thanks for writing a tutorial with Viewsaurus! This example tutorial will show you the basic functionality of Viewsaurus. Click the &quot;Start&quot; button below to see how Viewsaurus works.</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Setting Up The Application" class="chapter"><div data-title="What Are We Building?" data-file="app.js" class="step"><h2 id="warm-transfer">Warm Transfer</h2>
+<p><img src="//howtodocs.s3.amazonaws.com/warm-transfers.png" alt="Warm Transfer"></p>
+<p>Have you ever been disconnected from a support call while being transferred to
+someone else?</p>
+<p>Warm transfer eliminates this problem. Using Twilio powered
+warm transfers your agents will have the ability
+to dial in another agent in realtime.</p>
+<p>Here is how it works at a high level:</p>
+<ol>
+<li><p>The first agent becomes available when he/she connects through the web client.</p>
+</li>
+<li><p>The second agent also becomes available when he/she connects through the web client.</p>
+</li>
+<li><p>A client calls our support line.</p>
+</li>
+<li><p>The client stays on hold while the first agent joins the call.</p>
+</li>
+<li><p>While the first agent is on the phone with the client, he/she can dial a second agent into the call.</p>
+</li>
+<li><p>Once the second agent is on the call, the first one can disconnect from it.
+The client and the second agent stay on the call.</p>
+</li>
+</ol>
+<p>Let&#39;s get started!</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//expressjs.com/en/starter/installing.html">Installing Express</a></li>
+<li><a href="//twilio.github.io/twilio-node/">The Twilio Node Helper Library</a></li>
+</ul>
+</div><div data-title="Setting Up Voice Web Hook" data-file="routes/conference.js" data-highlight="43-43" class="step"><h2 id="setting-up-voice-web-hook">Setting Up Voice Web Hook</h2>
+<p>First let&#39;s configure the voice webhook for the Twilio number that customers
+will dial when they want to talk to a support agent.
+<img src="//howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif" alt="Configure Voice"></p>
+<p>This should be the public-facing endpoint of your app in production.</p>
+</div><div data-title="Connecting as a Support Agent" data-file="public/javascripts/main.js" data-highlight="17-51" class="step"><h2 id="connecting-an-agent">Connecting an Agent</h2>
+<p>Here you can see all front-end code necessary to connect an agent using
+<a href="//www.twilio.com/webrtc">Twilio&#39;s Voice Web Client</a>.</p>
+<p>We essentially need three things to have a live web client:</p>
+<ul>
+<li>A capability token (provided by our express app)</li>
+<li>A unique identifier (string) for each agent</li>
+<li>Event listeners to handle different Twilio-triggered events</li>
+</ul>
+<p>In the next step we&#39;ll take a closer look into capability token
+generation.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/docs/api/client/twilio-js">Twilio.js Library</a></li>
+<li><a href="//www.twilio.com/docs/quickstart/client">Twilio Client Quickstart</a></li>
+<li><a href="//twilio.github.io/twilio-node/#twimlResponse">TwiML response with the twilio-node library</a></li>
+</ul>
+</div><div data-title="Generate a Capability Token" data-file="lib/twilio-capability-generator.js" data-highlight="3-7" class="step"><h2 id="generate-a-capability-token">Generate a Capability Token</h2>
+<p>In order to connect the <a href="//www.twilio.com/webrtc">Twilio Voice Web Client</a>
+we need a <a href="//www.twilio.com/docs/client/capability-tokens">capability token</a>.</p>
+<p>To allow incoming connections through the web client an identifier must
+be provided when generating the token. For this tutorial we used fixed
+identifier strings like <code>agent1</code> and <code>agent2</code> but you can use any
+generated string for your call center clients. These identifiers will be
+used to create outbound calls to the specified agent using the <a href="//www.twilio.com/docs/api/rest">Twilio
+REST API</a>.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/docs/client/capability-tokens">Twilio Client: Capability Tokens</a></li>
+<li><a href="//twilio.github.io/twilio-node/#capability">Generate Capability Tokens with twilio-node</a></li>
+<li><a href="//www.twilio.com/docs/api/rest/making-calls">Making Calls With Twilio REST API</a></li>
+</ul>
+</div><div data-title="Handling Incoming Calls From Clients" data-file="routes/conference.js" data-highlight="43-70" class="step"><h2 id="handling-incoming-calls">Handling Incoming Calls</h2>
+<p>When a client makes a call to our Twilio number the application receives
+a POST request asking for instructions. We&#39;ll use <a href="//www.twilio.com/docs/api/twiml/">TwiML</a> to instruct the client
+to join a conference room and the Twilio REST API client to start a call with
+the first agent, so he can join the same conference.</p>
+<p>When providing instructions to the client, we also provide a
+<a href="//www.twilio.com/docs/api/twiml/conference#attributes-waitUrl"><code>waitUrl</code></a>,
+which in our case is another end point of our application. This returns more TwiML
+to <a href="//www.twilio.com/docs/api/twiml/say">say</a> welcome to the user, and also
+<a href="//www.twilio.com/docs/api/twiml/play">play</a> some music while on hold.
+Take a look at the code
+<a href="//github.com/TwilioDevEd/warm-transfer-node/blob/master/lib/twiml-generator.js#L13-L17">here</a></p>
+<p>We use the client&#39;s <a href="//www.twilio.com/help/faq/voice/what-is-a-call-sid"><code>CallSid</code></a> as the conference identifier. Since all participants
+need this identifier to join the conference we&#39;ll need to store it in a databse so that we can grab it when we dial the second agent in later.</p>
+</div><div data-title="Providing TwiML Instruction For The Client" data-file="lib/twiml-generator.js" data-highlight="3-11" class="step"><h2 id="providing-twiml-instruction-for-the-client">Providing TwiML Instruction For The Client</h2>
+<p>Here we create a <code>TwiMLResponse</code> that will contain a
+<a href="//www.twilio.com/docs/api/twiml/dial"><code>Dial</code></a> verb with a
+<a href="https://www.twilio.com/docs/api/twiml/conference"><code>Conference</code></a> noun that
+will instruct the client to join a specific conference room.</p>
+</div><div data-title="Dial First Agent Into the Call" data-file="lib/twilio-caller.js" class="step"><h2 id="dial-first-agent-into-the-call">Dial First Agent Into the Call</h2>
+<p>For our app we created a <code>Caller</code> module to handle dialing our agents. This module uses
+Twilio&#39;s REST API to create a new call. The <code>create</code> method
+receives a hash with the following keys:</p>
+<ol>
+<li><p><code>from</code>: Your Twilio number</p>
+</li>
+<li><p><code>to</code>  : The agent web client&#39;s identifier (<code>agent1</code> or <code>agent2</code>)</p>
+</li>
+<li><p><code>url</code> : A url to ask for TwiML instructions when the call connects</p>
+</li>
+</ol>
+<p>Once the agent answers the call in the web client, a request is made to the
+callback url instructing the agent&#39;s call to join the conference room where
+the client is already waiting.</p>
+</div><div data-title="Dial Second Agent Into the Call" data-file="routes/conference.js" data-highlight="72-79" class="step"><h2 id="dial-second-agent-into-the-call">Dial Second Agent Into the Call</h2>
+<p>When the client and the first agent are both in the call we are ready to
+perform a <em>warm  transfer</em> to a second agent. The first agent makes a
+request passing its <code>identifier</code> to allow us to look for the <code>conference_id</code>
+needed to dial the second agent in. Since we already have a <code>Caller</code> module we can simply use the <code>call_agent</code> instance method to connect the second agent.</p>
+</div><div data-title="The First Agent Leaves the Call" data-file="lib/twiml-generator.js" data-highlight="4-10" class="step"><h2 id="the-first-agent-leaves-the-call">The First Agent Leaves the Call</h2>
+<p>When the three participants have joined the same call, the first agent has
+served his purpose. Now he can drop the call, leaving agent two and the client
+to have a pleasant conversation.</p>
+<p>It is important to notice the differences between the TwiML each one of the
+participants received when joining the call. Both, agent one and two, have
+<code>startConferenceOnEnter</code> set to <code>true</code>. This means the conference will start when
+any of them joins the call. For the client calling and for agent two, <code>endConferenceOnExit</code>
+is set to true. This causes the call to end when either of these two participants
+drop the call.</p>
+</div><div class="step"><h2 id="where-to-next-">Where to next?</h2>
+<p>That&#39;s it! We have just implemented warm transfers using Node.js/Express.
+Now your clients won&#39;t get disconnect from support calls while they are been
+transferred to some else.</p>
+<p>If you&#39;re a Node.js developer working with Twilio, you might also enjoy these
+tutorials:</p>
+<p><a href="//www.twilio.com/docs/tutorials/walkthrough/browser-calls/node/express"><strong>Browser-Calls</strong></a></p>
+<p>Learn how to use Twilio Client to make browser-to-phone and browser-to-browser calls with ease.</p>
+<p><a href="//www.twilio.com/docs/tutorials/walkthrough/eta-notifications/node/express"><strong>ETA-Notifications</strong></a></p>
+<p>Learn how to implement ETA Notifications using Node.js/Express and Twilio.</p>
+<p>Thanks for checking out this tutorial! If you have any feedback
+to share with us, we&#39;d love to hear it.
+<a href="//www.twilio.com/help/contact">Contact support</a> to let us know what you think.</p>
+</div></div>
+<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="app.js" data-mode="javascript">cmVxdWlyZSgnZG90ZW52JykuY29uZmlnKHtzaWxlbnQ6IHRydWV9KTsKCnZhciBleHByZXNzID0gcmVxdWlyZSgnZXhwcmVzcycpOwp2YXIgcGF0aCA9IHJlcXVpcmUoJ3BhdGgnKTsKdmFyIGZhdmljb24gPSByZXF1aXJlKCdzZXJ2ZS1mYXZpY29uJyk7CnZhciBsb2dnZXIgPSByZXF1aXJlKCdtb3JnYW4nKTsKdmFyIGNvb2tpZVBhcnNlciA9IHJlcXVpcmUoJ2Nvb2tpZS1wYXJzZXInKTsKdmFyIGJvZHlQYXJzZXIgPSByZXF1aXJlKCdib2R5LXBhcnNlcicpOwoKdmFyIGNvbmZlcmVuY2VSb3V0ZXIgPSByZXF1aXJlKCcuL3JvdXRlcy9jb25mZXJlbmNlJyk7CnZhciB0b2tlblJvdXRlciA9IHJlcXVpcmUoJy4vcm91dGVzL3Rva2VuJyk7CnZhciBhcHAgPSBleHByZXNzKCk7CgovLyB2aWV3IGVuZ2luZSBzZXR1cAphcHAuc2V0KCd2aWV3cycsIHBhdGguam9pbihfX2Rpcm5hbWUsICd2aWV3cycpKTsKYXBwLnNldCgndmlldyBlbmdpbmUnLCAnamFkZScpOwoKLy8gdW5jb21tZW50IGFmdGVyIHBsYWNpbmcgeW91ciBmYXZpY29uIGluIC9wdWJsaWMKLy9hcHAudXNlKGZhdmljb24ocGF0aC5qb2luKF9fZGlybmFtZSwgJ3B1YmxpYycsICdmYXZpY29uLmljbycpKSk7CmFwcC51c2UobG9nZ2VyKCdkZXYnKSk7CmFwcC51c2UoYm9keVBhcnNlci5qc29uKCkpOwphcHAudXNlKGJvZHlQYXJzZXIudXJsZW5jb2RlZCh7IGV4dGVuZGVkOiBmYWxzZSB9KSk7CmFwcC51c2UoY29va2llUGFyc2VyKCkpOwphcHAudXNlKGV4cHJlc3Muc3RhdGljKHBhdGguam9pbihfX2Rpcm5hbWUsICdwdWJsaWMnKSkpOwoKLy8gcm91dGVzCmFwcC5nZXQoJy8nLCBmdW5jdGlvbiAocmVxLCByZXMpIHsKICByZXMucmVuZGVyKCdpbmRleCcpOwp9KTsKYXBwLnVzZSgnL2NvbmZlcmVuY2UnLCBjb25mZXJlbmNlUm91dGVyKTsKYXBwLnVzZSgnL3Rva2VuJywgdG9rZW5Sb3V0ZXIpOwoKCi8vIGNhdGNoIDQwNCBhbmQgZm9yd2FyZCB0byBlcnJvciBoYW5kbGVyCmFwcC51c2UoZnVuY3Rpb24ocmVxLCByZXMsIG5leHQpIHsKICB2YXIgZXJyID0gbmV3IEVycm9yKCdOb3QgRm91bmQnKTsKICBlcnIuc3RhdHVzID0gNDA0OwogIG5leHQoZXJyKTsKfSk7CgovLyBlcnJvciBoYW5kbGVycwoKLy8gZGV2ZWxvcG1lbnQgZXJyb3IgaGFuZGxlcgovLyB3aWxsIHByaW50IHN0YWNrdHJhY2UKaWYgKGFwcC5nZXQoJ2VudicpID09PSAnZGV2ZWxvcG1lbnQnKSB7CiAgYXBwLnVzZShmdW5jdGlvbihlcnIsIHJlcSwgcmVzLCBuZXh0KSB7CiAgICBjb25zb2xlLnRyYWNlKGVycik7CiAgICByZXMuc3RhdHVzKGVyci5zdGF0dXMgfHwgNTAwKTsKICAgIHJlcy5yZW5kZXIoJ2Vycm9yJywgewogICAgICBtZXNzYWdlOiBlcnIubWVzc2FnZSwKICAgICAgZXJyb3I6IGVycgogICAgfSk7CiAgfSk7Cn0KCi8vIHByb2R1Y3Rpb24gZXJyb3IgaGFuZGxlcgovLyBubyBzdGFja3RyYWNlcyBsZWFrZWQgdG8gdXNlcgphcHAudXNlKGZ1bmN0aW9uKGVyciwgcmVxLCByZXMsIG5leHQpIHsKICByZXMuc3RhdHVzKGVyci5zdGF0dXMgfHwgNTAwKTsKICByZXMucmVuZGVyKCdlcnJvcicsIHsKICAgIG1lc3NhZ2U6IGVyci5tZXNzYWdlLAogICAgZXJyb3I6IHt9CiAgfSk7Cn0pOwoKCm1vZHVsZS5leHBvcnRzID0gYXBwOw==</textarea>
+<textarea class="saurus-file" data-file="routes/conference.js" data-mode="javascript">dmFyIGV4cHJlc3MgPSByZXF1aXJlKCdleHByZXNzJykKICAsIHJvdXRlciA9IGV4cHJlc3MuUm91dGVyKCkKICAsIHR3aW1sR2VuZXJhdG9yID0gcmVxdWlyZSgnLi4vbGliL3R3aW1sLWdlbmVyYXRvcicpCiAgLCBDYWxsID0gcmVxdWlyZSgnLi4vbW9kZWxzL2NhbGwnKQogICwgdXJsID0gcmVxdWlyZSgndXJsJykKICAsIHR3aWxpb0NhbGxlciA9IHJlcXVpcmUoJy4uL2xpYi90d2lsaW8tY2FsbGVyJyk7Cgp2YXIgQUdFTlRfV0FJVF9VUkwgPSAiaHR0cDovL3R3aW1sZXRzLmNvbS9ob2xkbXVzaWM/QnVja2V0PWNvbS50d2lsaW8ubXVzaWMuY2xhc3NpY2FsIjsKCnZhciBjb25uZWN0Q29uZmVyZW5jZVVybCA9IGZ1bmN0aW9uKHJlcSwgYWdlbnRJZCwgY29uZmVyZW5jZUlkKSB7CiAgdmFyIHBhdGhuYW1lID0gIi9jb25mZXJlbmNlLyIrY29uZmVyZW5jZUlkKyIvY29ubmVjdC8iK2FnZW50SWQ7CiAgcmV0dXJuIHVybC5mb3JtYXQoewogICAgcHJvdG9jb2w6ICdodHRwcycsCiAgICBob3N0OiByZXEuZ2V0KCdob3N0JyksCiAgICBwYXRobmFtZTogcGF0aG5hbWUKICB9KTsKfTsKCnJvdXRlci5wb3N0KCcvd2FpdC8nLCBmdW5jdGlvbiAocmVxLCByZXMpIHsKICByZXMuc2VuZCh0d2ltbEdlbmVyYXRvci53YWl0UmVzcG9uc2VUd2ltbCgpLnRvU3RyaW5nKCkpOwp9KTsKCnJvdXRlci5wb3N0KCcvOmNvbmZlcmVuY2VJZC9jb25uZWN0L2FnZW50MS8nLCBmdW5jdGlvbiAocmVxLCByZXMpIHsKICByZXMuc2VuZCh0d2ltbEdlbmVyYXRvci5jb25uZWN0Q29uZmVyZW5jZVR3aW1sKHsKICAgIGNvbmZlcmVuY2VJZDpyZXEucGFyYW1zWydjb25mZXJlbmNlSWQnXSwKICAgIHdhaXRVcmw6IEFHRU5UX1dBSVRfVVJMLCAKICAgIHN0YXJ0Q29uZmVyZW5jZU9uRW50ZXI6IHRydWUsIAogICAgZW5kQ29uZmVyZW5jZU9uRXhpdDogZmFsc2UKICB9KQogIC50b1N0cmluZygpKTsKfSk7Cgpyb3V0ZXIucG9zdCgnLzpjb25mZXJlbmNlSWQvY29ubmVjdC9hZ2VudDIvJywgZnVuY3Rpb24gKHJlcSwgcmVzKSB7CiAgcmVzLnNlbmQodHdpbWxHZW5lcmF0b3IuY29ubmVjdENvbmZlcmVuY2VUd2ltbCh7CiAgICBjb25mZXJlbmNlSWQ6cmVxLnBhcmFtc1snY29uZmVyZW5jZUlkJ10sCiAgICB3YWl0VXJsOiBBR0VOVF9XQUlUX1VSTCwgCiAgICBzdGFydENvbmZlcmVuY2VPbkVudGVyOiB0cnVlLCAKICAgIGVuZENvbmZlcmVuY2VPbkV4aXQ6IHRydWUKICB9KQogIC50b1N0cmluZygpKTsKfSk7Cgpyb3V0ZXIucG9zdCgnL2Nvbm5lY3QvY2xpZW50LycsIGZ1bmN0aW9uIChyZXEsIHJlcykgewogIHZhciBjb25mZXJlbmNlSWQgPSByZXEuYm9keVsnQ2FsbFNpZCddOwogIHZhciBhZ2VudE9uZSA9ICdhZ2VudDEnOwogIHZhciBjYWxsYmFja1VybCA9IGNvbm5lY3RDb25mZXJlbmNlVXJsKHJlcSwgYWdlbnRPbmUsIGNvbmZlcmVuY2VJZCk7CiAgCiAgdHdpbGlvQ2FsbGVyLmNhbGwoYWdlbnRPbmUsIGNhbGxiYWNrVXJsKTsKCiAgQ2FsbC5maW5kT25lQW5kVXBkYXRlKAogICAgewogICAgICBhZ2VudElkOiBhZ2VudE9uZQogICAgfSwKICAgIHsKICAgICAgYWdlbnRJZDogYWdlbnRPbmUsCiAgICAgIGNvbmZlcmVuY2VJZDogY29uZmVyZW5jZUlkCiAgICB9LAogICAgewogICAgICB1cHNlcnQ6IHRydWUKICAgIH0pCiAgLnRoZW4oZnVuY3Rpb24oZG9jKXsKICAgIHJlcy5zZW5kKHR3aW1sR2VuZXJhdG9yLmNvbm5lY3RDb25mZXJlbmNlVHdpbWwoewogICAgICBjb25mZXJlbmNlSWQ6Y29uZmVyZW5jZUlkLAogICAgICB3YWl0VXJsOiBBR0VOVF9XQUlUX1VSTCwgCiAgICAgIHN0YXJ0Q29uZmVyZW5jZU9uRW50ZXI6IGZhbHNlLAogICAgICBlbmRDb25mZXJlbmNlT25FeGl0OiB0cnVlCiAgICB9KQogICAgLnRvU3RyaW5nKCkpOwogIH0pOwp9KTsKCnJvdXRlci5wb3N0KCcvOmFnZW50SWQvY2FsbC8nLCBmdW5jdGlvbiAocmVxLCByZXMpIHsKICB2YXIgYWdlbnRUd28gPSAnYWdlbnQyJzsKICBDYWxsLmZpbmRPbmUoe2FnZW50SWQ6IHJlcS5wYXJhbXNbJ2FnZW50SWQnXX0sIGZ1bmN0aW9uIChlcnIsIGNhbGwpIHsKICAgIHZhciBjYWxsYmFja1VybCA9IGNvbm5lY3RDb25mZXJlbmNlVXJsKHJlcSwgYWdlbnRUd28sIGNhbGwuY29uZmVyZW5jZUlkKTsKICAgIHR3aWxpb0NhbGxlci5jYWxsKGFnZW50VHdvLCBjYWxsYmFja1VybCk7CiAgICByZXMuc2VuZFN0YXR1cygyMDApOwogIH0pOwp9KTsKCgptb2R1bGUuZXhwb3J0cyA9IHJvdXRlcjs=</textarea>
+<textarea class="saurus-file" data-file="public/javascripts/main.js" data-mode="javascript">JChmdW5jdGlvbigpIHsKICB2YXIgY3VycmVudEFnZW50SWQ7CiAgdmFyIGN1cnJlbnRDb25uZWN0aW9uOwogIHZhciAkY2FsbFN0YXR1cyA9ICQoJyNjYWxsLXN0YXR1cycpOwogIHZhciAkY29ubmVjdEFnZW50MUJ1dHRvbiA9ICQoIiNjb25uZWN0LWFnZW50MS1idXR0b24iKTsKICB2YXIgJGNvbm5lY3RBZ2VudDJCdXR0b24gPSAkKCIjY29ubmVjdC1hZ2VudDItYnV0dG9uIik7CgogIHZhciAkYW5zd2VyQ2FsbEJ1dHRvbiA9ICQoIiNhbnN3ZXItY2FsbC1idXR0b24iKTsKICB2YXIgJGhhbmd1cENhbGxCdXR0b24gPSAkKCIjaGFuZ3VwLWNhbGwtYnV0dG9uIik7CiAgdmFyICRkaWFsQWdlbnQyQnV0dG9uID0gJCgiI2RpYWwtYWdlbnQyLWJ1dHRvbiIpOwoKICAkY29ubmVjdEFnZW50MUJ1dHRvbi5vbignY2xpY2snLCB7IGFnZW50SWQ6ICdhZ2VudDEnIH0sIGFnZW50Q2xpY2tIYW5kbGVyKTsKICAkY29ubmVjdEFnZW50MkJ1dHRvbi5vbignY2xpY2snLCB7IGFnZW50SWQ6ICdhZ2VudDInIH0sIGFnZW50Q2xpY2tIYW5kbGVyKTsKICAkaGFuZ3VwQ2FsbEJ1dHRvbi5vbignY2xpY2snLCBoYW5nVXApOwogICRkaWFsQWdlbnQyQnV0dG9uLm9uKCdjbGljaycsIGRpYWxBZ2VudDIpOwoKICBmdW5jdGlvbiBmZXRjaFRva2VuKGFnZW50SWQpIHsKICAgICQucG9zdCgnL3Rva2VuLycrIGFnZW50SWQsIHt9LCBmdW5jdGlvbihkYXRhKSB7CiAgICAgIGN1cnJlbnRBZ2VudElkID0gZGF0YS5hZ2VudElkOwogICAgICBjb25uZWN0Q2xpZW50KGRhdGEudG9rZW4pCiAgICB9LCAnanNvbicpOwogIH0KCiAgZnVuY3Rpb24gY29ubmVjdENsaWVudCh0b2tlbikgewogICAgVHdpbGlvLkRldmljZS5zZXR1cCh0b2tlbik7CiAgfQoKICBUd2lsaW8uRGV2aWNlLnJlYWR5KGZ1bmN0aW9uIChkZXZpY2UpIHsKICAgIHVwZGF0ZUNhbGxTdGF0dXMoIlJlYWR5Iik7CiAgICBhZ2VudENvbm5lY3RlZEhhbmRsZXIoZGV2aWNlLl9jbGllbnROYW1lKTsKICB9KTsKCiAgLy8gQ2FsbGJhY2sgZm9yIHdoZW4gVHdpbGlvIENsaWVudCByZWNlaXZlcyBhIG5ldyBpbmNvbWluZyBjYWxsCiAgVHdpbGlvLkRldmljZS5pbmNvbWluZyhmdW5jdGlvbihjb25uZWN0aW9uKSB7CiAgICBjdXJyZW50Q29ubmVjdGlvbiA9IGNvbm5lY3Rpb247CiAgICB1cGRhdGVDYWxsU3RhdHVzKCJJbmNvbWluZyBzdXBwb3J0IGNhbGwiKTsKCiAgICAvLyBTZXQgYSBjYWxsYmFjayB0byBiZSBleGVjdXRlZCB3aGVuIHRoZSBjb25uZWN0aW9uIGlzIGFjY2VwdGVkCiAgICBjb25uZWN0aW9uLmFjY2VwdChmdW5jdGlvbigpIHsKICAgICAgdXBkYXRlQ2FsbFN0YXR1cygiSW4gY2FsbCB3aXRoIGN1c3RvbWVyIik7CiAgICAgICRhbnN3ZXJDYWxsQnV0dG9uLnByb3AoJ2Rpc2FibGVkJywgdHJ1ZSk7CiAgICAgICRoYW5ndXBDYWxsQnV0dG9uLnByb3AoJ2Rpc2FibGVkJywgZmFsc2UpOwogICAgICAkZGlhbEFnZW50MkJ1dHRvbi5wcm9wKCdkaXNhYmxlZCcsIGZhbHNlKTsKICAgIH0pOwoKICAgIC8vIFNldCBhIGNhbGxiYWNrIG9uIHRoZSBhbnN3ZXIgYnV0dG9uIGFuZCBlbmFibGUgaXQKICAgICRhbnN3ZXJDYWxsQnV0dG9uLmNsaWNrKGZ1bmN0aW9uKCkgewogICAgICBjb25uZWN0aW9uLmFjY2VwdCgpOwogICAgfSk7CiAgICAkYW5zd2VyQ2FsbEJ1dHRvbi5wcm9wKCdkaXNhYmxlZCcsIGZhbHNlKTsKICB9KTsKCiAgLyogUmVwb3J0IGFueSBlcnJvcnMgdG8gdGhlIGNhbGwgc3RhdHVzIGRpc3BsYXkgKi8KICBUd2lsaW8uRGV2aWNlLmVycm9yKGZ1bmN0aW9uIChlcnJvcikgewogICAgdXBkYXRlQ2FsbFN0YXR1cygiRVJST1I6ICIgKyBlcnJvci5tZXNzYWdlKTsKICAgIGRpc2FibGVDb25uZWN0QnV0dG9ucyhmYWxzZSk7CiAgfSk7CgogIC8vIENhbGxiYWNrIGZvciB3aGVuIHRoZSBjYWxsIGZpbmFsaXplcwogIFR3aWxpby5EZXZpY2UuZGlzY29ubmVjdChmdW5jdGlvbihjb25uZWN0aW9uKSB7CiAgICBjYWxsRW5kZWRIYW5kbGVyKGNvbm5lY3Rpb24uZGV2aWNlLl9jbGllbnROYW1lKTsKICB9KTsKCiAgZnVuY3Rpb24gZGlhbEFnZW50MigpIHsKICAgICQucG9zdCgnL2NvbmZlcmVuY2UvJyArIGN1cnJlbnRBZ2VudElkICsgJy9jYWxsJykKICB9CgogIC8qIEVuZCBhIGNhbGwgKi8KICBmdW5jdGlvbiBoYW5nVXAoKSB7CiAgICBUd2lsaW8uRGV2aWNlLmRpc2Nvbm5lY3RBbGwoKTsKICB9CgogIGZ1bmN0aW9uIGFnZW50Q2xpY2tIYW5kbGVyKGUpIHsKICAgIHZhciBhZ2VudElkID0gZS5kYXRhLmFnZW50SWQ7CiAgICBkaXNhYmxlQ29ubmVjdEJ1dHRvbnModHJ1ZSk7CiAgICBmZXRjaFRva2VuKGFnZW50SWQpOwogIH0KCiAgZnVuY3Rpb24gYWdlbnRDb25uZWN0ZWRIYW5kbGVyKGFnZW50SWQpIHsKICAgICQoJyNjb25uZWN0LWFnZW50LXJvdycpLmFkZENsYXNzKCdoaWRkZW4nKTsKICAgICQoJyNjb25uZWN0ZWQtYWdlbnQtcm93JykucmVtb3ZlQ2xhc3MoJ2hpZGRlbicpOwogICAgdXBkYXRlQ2FsbFN0YXR1cygiQ29ubmVjdGVkIGFzOiAiICsgYWdlbnRJZCk7CgogICAgaWYgKGFnZW50SWQgPT09ICdhZ2VudDEnKSB7CiAgICAgICRkaWFsQWdlbnQyQnV0dG9uLnJlbW92ZUNsYXNzKCdoaWRkZW4nKS5wcm9wKCdkaXNhYmxlZCcsIHRydWUpOwogICAgfQogICAgZWxzZSB7CiAgICAgICRkaWFsQWdlbnQyQnV0dG9uLmFkZENsYXNzKCdoaWRkZW4nKQogICAgfQogIH0KCiAgZnVuY3Rpb24gY2FsbEVuZGVkSGFuZGxlcihhZ2VudElkKSB7CiAgICAkZGlhbEFnZW50MkJ1dHRvbi5wcm9wKCdkaXNhYmxlZCcsIHRydWUpOwogICAgJGhhbmd1cENhbGxCdXR0b24ucHJvcCgnZGlzYWJsZWQnLCB0cnVlKTsKICAgICRhbnN3ZXJDYWxsQnV0dG9uLnByb3AoJ2Rpc2FibGVkJywgdHJ1ZSkKICAgIHVwZGF0ZUNhbGxTdGF0dXMoIkNvbm5lY3RlZCBhczogIiArIGFnZW50SWQpOwogIH0KCiAgZnVuY3Rpb24gZGlzYWJsZUNvbm5lY3RCdXR0b25zKGRpc2FibGUpIHsKICAgICRjb25uZWN0QWdlbnQxQnV0dG9uLnByb3AoJ2Rpc2FibGVkJywgZGlzYWJsZSk7CiAgICAkY29ubmVjdEFnZW50MkJ1dHRvbi5wcm9wKCdkaXNhYmxlZCcsIGRpc2FibGUpOwogIH0KCiAgZnVuY3Rpb24gdXBkYXRlQ2FsbFN0YXR1cyhzdGF0dXMpIHsKICAgICRjYWxsU3RhdHVzLnRleHQoc3RhdHVzKTsKICB9Cn0pOwo=</textarea>
+<textarea class="saurus-file" data-file="lib/twilio-capability-generator.js" data-mode="javascript">dmFyIHR3aWxpbyA9IHJlcXVpcmUoJ3R3aWxpbycpOwoKbW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbihhZ2VudElkKXsKICB2YXIgY2FwYWJpbGl0eSA9IG5ldyB0d2lsaW8uQ2FwYWJpbGl0eShwcm9jZXNzLmVudi5UV0lMSU9fQUNDT1VOVF9TSUQsIHByb2Nlc3MuZW52LlRXSUxJT19BVVRIX1RPS0VOKTsKICBjYXBhYmlsaXR5LmFsbG93Q2xpZW50SW5jb21pbmcoYWdlbnRJZCk7CiAgcmV0dXJuIGNhcGFiaWxpdHkuZ2VuZXJhdGUoKTsKfQ==</textarea>
+<textarea class="saurus-file" data-file="lib/twiml-generator.js" data-mode="javascript">dmFyIHR3aWxpbyA9IHJlcXVpcmUoJ3R3aWxpbycpOwoKdmFyIGNvbm5lY3RDb25mZXJlbmNlVHdpbWwgPSBmdW5jdGlvbihvcHRpb25zKXsKICByZXR1cm4gbmV3IHR3aWxpby5Ud2ltbFJlc3BvbnNlKCkuZGlhbChmdW5jdGlvbihkaWFsTm9kZSl7CiAgICBkaWFsTm9kZS5jb25mZXJlbmNlKG9wdGlvbnMuY29uZmVyZW5jZUlkLCB7CiAgICAgICdzdGFydENvbmZlcmVuY2VPbkVudGVyJzogb3B0aW9ucy5zdGFydENvbmZlcmVuY2VPbkVudGVyLAogICAgICAnZW5kQ29uZmVyZW5jZU9uRXhpdCc6IG9wdGlvbnMuZW5kQ29uZmVyZW5jZU9uRXhpdCwKICAgICAgJ3dhaXRVcmwnOiBvcHRpb25zLndhaXRVcmwKICAgIH0pOwogIH0pOwp9OwoKdmFyIHdhaXRSZXNwb25zZVR3aW1sID0gZnVuY3Rpb24oKXsKCXJldHVybiBuZXcgdHdpbGlvLlR3aW1sUmVzcG9uc2UoKQoJCS5zYXkoJ1RoYW5rIHlvdSBmb3IgY2FsbGluZy4gUGxlYXNlIHdhaXQgaW4gbGluZSBmb3IgYSBmZXcgc2Vjb25kcy4gQW4gYWdlbnQgd2lsbCBiZSB3aXRoIHlvdSBzaG9ydGx5LicpCiAgCS5wbGF5KCdodHRwOi8vY29tLnR3aWxpby5tdXNpYy5jbGFzc2ljYWwuczMuYW1hem9uYXdzLmNvbS9CdXN5U3RyaW5ncy5tcDMnKTsKfTsKCm1vZHVsZS5leHBvcnRzLndhaXRSZXNwb25zZVR3aW1sID0gd2FpdFJlc3BvbnNlVHdpbWw7Cm1vZHVsZS5leHBvcnRzLmNvbm5lY3RDb25mZXJlbmNlVHdpbWwgPSBjb25uZWN0Q29uZmVyZW5jZVR3aW1sOw==</textarea>
+<textarea class="saurus-file" data-file="lib/twilio-caller.js" data-mode="javascript">dmFyIHR3aWxpbyA9IHJlcXVpcmUoJ3R3aWxpbycpOwoKdmFyIGNsaWVudCA9IHR3aWxpbyhwcm9jZXNzLmVudi5UV0lMSU9fQUNDT1VOVF9TSUQsIHByb2Nlc3MuZW52LlRXSUxJT19BVVRIX1RPS0VOKTsKCnZhciBjYWxsID0gZnVuY3Rpb24oYWdlbnRJZCwgY2FsbGJhY2tVcmwpIHsKICB2YXIgdHdpbGlvUGhvbmVOdW1iZXIgPSBwcm9jZXNzLmVudi5UV0lMSU9fTlVNQkVSOwogIAogIGNsaWVudC5tYWtlQ2FsbCh7CiAgICBmcm9tOiB0d2lsaW9QaG9uZU51bWJlciwKICAgIHRvOiAiY2xpZW50OiIrYWdlbnRJZCwKICAgIHVybDogY2FsbGJhY2tVcmwKICB9KTsKCn07Cgptb2R1bGUuZXhwb3J0cy5jYWxsID0gY2FsbDs=</textarea>
+</div>
+</div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/&lt;your GitHub username&gt;/&lt;GitHub repo name&gt;" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>
