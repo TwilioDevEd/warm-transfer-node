@@ -10,7 +10,7 @@ var AGENT_WAIT_URL = "http://twimlets.com/holdmusic?Bucket=com.twilio.music.clas
 var connectConferenceUrl = function(req, agentId, conferenceId) {
   var pathname = "/conference/"+conferenceId+"/connect/"+agentId;
   return url.format({
-    protocol: req.protocol,
+    protocol: 'https',
     host: req.get('host'),
     pathname: pathname
   });
@@ -41,10 +41,9 @@ router.post('/:conferenceId/connect/agent2/', function (req, res) {
 });
 
 router.post('/connect/client/', function (req, res) {
-  var conferenceId = req.body['callSid'];
+  var conferenceId = req.body['CallSid'];
   var agentOne = 'agent1';
   var callbackUrl = connectConferenceUrl(req, agentOne, conferenceId);
-  
   twilioCaller.call(agentOne, callbackUrl);
 
   Call.findOneAndUpdate(
@@ -58,7 +57,7 @@ router.post('/connect/client/', function (req, res) {
     {
       upsert: true
     })
-  .then(function(err, doc){
+  .then(function(doc){
     res.send(twimlGenerator.connectConferenceTwiml({
       conferenceId:conferenceId,
       waitUrl: AGENT_WAIT_URL, 

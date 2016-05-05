@@ -93,7 +93,7 @@ describe('conference route', function () {
       testApp
       .post('/conference/connect/client')
       .send({
-        callSid: 'conference-id'
+        CallSid: 'conference-id'
       })
       .expect(200)
       .end(function(err, res) {
@@ -108,7 +108,7 @@ describe('conference route', function () {
       testApp
       .post('/conference/connect/client')
       .send({
-        callSid: 'conference-id'
+        CallSid: 'conference-id'
       })
       .expect(200)
       .end(function(err, res) {
@@ -128,7 +128,7 @@ describe('conference route', function () {
         testApp
         .post('/conference/connect/client')
         .send({
-          callSid: 'conference-id'
+          CallSid: 'conference-id'
         })
         .expect(200)
         .end(function (err, res) {
@@ -147,7 +147,7 @@ describe('conference route', function () {
       testApp
       .post('/conference/connect/client')
       .send({
-        callSid: 'conference-id'
+        CallSid: 'conference-id'
       })
       .expect(function(res) {
         var $ = cheerio.load(res.text);
