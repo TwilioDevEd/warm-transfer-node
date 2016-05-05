@@ -20,11 +20,13 @@ var connectConferenceUrl = function(req, agentId, conferenceId) {
 
 //POST /conoference/wait
 router.post('/wait/', function (req, res) {
+  res.type('text/xml');
   res.send(twimlGenerator.waitResponseTwiml().toString());
 });
 
 //POST /conference/:conferenceId/connect/agent1/
 router.post('/:conferenceId/connect/agent1/', function (req, res) {
+  res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
     conferenceId:req.params.conferenceId,
     waitUrl: AGENT_WAIT_URL, 
@@ -36,6 +38,7 @@ router.post('/:conferenceId/connect/agent1/', function (req, res) {
 
 //POST /conference/:conferenceId/connect/agent2/
 router.post('/:conferenceId/connect/agent2/', function (req, res) {
+  res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
     conferenceId:req.params.conferenceId,
     waitUrl: AGENT_WAIT_URL, 
@@ -65,6 +68,7 @@ router.post('/connect/client/', function (req, res) {
       upsert: true
     })
   .then(function(doc){
+    res.type('text/xml');
     res.send(twimlGenerator.connectConferenceTwiml({
       conferenceId:conferenceId,
       waitUrl: AGENT_WAIT_URL, 
