@@ -11,7 +11,7 @@
 
       Warm transfer eliminates this problem. Using Twilio powered
       warm transfers your agents will have the ability
-      to dial in another agent in realtime.
+      to dial in another agent in real-time.
 
       Here is how it works at a high level:
 
@@ -37,11 +37,11 @@
       * [The Twilio Node Helper Library](//twilio.github.io/twilio-node/)
 
   .step(
-    data-title="Setting Up Voice Web Hook",
+    data-title="Setting Up Voice Webhook",
     data-file='routes/conference.js',
     data-highlight='43-43')
     :markdown
-      ## Setting Up Voice Web Hook
+      ## Setting Up Voice Webhook
 
       First let's configure the voice webhook for the Twilio number that customers
       will dial when they want to talk to a support agent.
@@ -114,14 +114,14 @@
 
       When providing instructions to the client, we also provide a
       [`waitUrl`](//www.twilio.com/docs/api/twiml/conference#attributes-waitUrl),
-      which in our case is another end point of our application. This returns more TwiML
+      which in our case is another endpoint of our application. This returns more TwiML
       to [say](//www.twilio.com/docs/api/twiml/say) welcome to the user, and also
       [play](//www.twilio.com/docs/api/twiml/play) some music while on hold.
       Take a look at the code
       [here](//github.com/TwilioDevEd/warm-transfer-node/blob/master/lib/twiml-generator.js#L13-L17)
 
       We use the client's [`CallSid`](//www.twilio.com/help/faq/voice/what-is-a-call-sid) as the conference identifier. Since all participants
-      need this identifier to join the conference we'll need to store it in a databse so that we can grab it when we dial the second agent in later.
+      need this identifier to join the conference we'll need to store it in a database so that we can grab it when we dial the second agent in later.
 
   .step(
     data-title="Providing TwiML Instruction For The Client",
@@ -149,10 +149,10 @@
 
       1. `to`  : The agent web client's identifier (`agent1` or `agent2`)
 
-      1. `url` : A url to ask for TwiML instructions when the call connects
+      1. `url` : A URL to ask for TwiML instructions when the call connects
 
       Once the agent answers the call in the web client, a request is made to the
-      callback url instructing the agent's call to join the conference room where
+      callback URL instructing the agent's call to join the conference room where
       the client is already waiting.
 
   .step(
