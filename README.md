@@ -57,7 +57,7 @@
 
 1. Configure Twilio to call your webhooks
 
-  You will also need to configure Twilio to call your application when calls are received on your `TWILIO_NUMBER`. The voice url should look something like this:
+  You will also need to configure Twilio to call your application when calls are received on your `TWILIO_NUMBER`. The voice URL should look something like this:
 
   ```
   http://<your-ngrok-subdomain>.ngrok.io/conference/connect/client
@@ -73,7 +73,7 @@ That's it!
    browser tabs or windows.
 
    **Notes:**
-   * Remember to use your SSL enabled ngrok url `https`.
+   * Remember to use your SSL enabled ngrok URL `https`.
    Failing to do this won't allow you to receive incoming calls.
    * The application has been tested with [Chrome](https://www.google.com/chrome/)
    and [Firefox](https://firefox.com). Safari is not supported at the moment.
