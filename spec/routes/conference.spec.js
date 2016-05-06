@@ -88,7 +88,7 @@ describe('conference route', function () {
     });
 
     it('should make a call', function (done) {
-      twilioCallerMock.expects("call").once().
+      twilioCallerMock.expects('call').once().
       withArgs('agent1', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id\/connect\/agent1/));
 
       var testApp = supertest(app);
@@ -191,7 +191,7 @@ describe('conference route', function () {
     });
 
     it('should make a call', function (done) {
-      twilioCallerMock.expects("call").once()
+      twilioCallerMock.expects('call').once()
       .withArgs('agent2', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id50\/connect\/agent2/));
 
       var testApp = supertest(app);
