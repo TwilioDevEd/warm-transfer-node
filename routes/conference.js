@@ -7,10 +7,10 @@ var express = require('express')
   , url = require('url')
   , twilioCaller = require('../lib/twilio-caller');
 
-var AGENT_WAIT_URL = "http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical";
+var AGENT_WAIT_URL = 'http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical';
 
 var connectConferenceUrl = function(req, agentId, conferenceId) {
-  var pathname = "/conference/"+conferenceId+"/connect/"+agentId;
+  var pathname = '/conference/'+conferenceId+'/connect/'+agentId;
   return url.format({
     protocol: 'https',
     host: req.get('host'),
@@ -18,11 +18,13 @@ var connectConferenceUrl = function(req, agentId, conferenceId) {
   });
 };
 
+//POST /conoference/wait
 router.post('/wait/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.waitResponseTwiml().toString());
 });
 
+//POST /conference/:conferenceId/connect/agent1/
 router.post('/:conferenceId/connect/agent1/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
@@ -34,6 +36,7 @@ router.post('/:conferenceId/connect/agent1/', function (req, res) {
   .toString());
 });
 
+//POST /conference/:conferenceId/connect/agent2/
 router.post('/:conferenceId/connect/agent2/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
@@ -45,6 +48,7 @@ router.post('/:conferenceId/connect/agent2/', function (req, res) {
   .toString());
 });
 
+//POST /conference/connect/client/
 router.post('/connect/client/', function (req, res) {
   var conferenceId = req.body.CallSid
     , agentOne = 'agent1'
@@ -75,6 +79,7 @@ router.post('/connect/client/', function (req, res) {
   });
 });
 
+//POST /conference/:agentId/call/
 router.post('/:agentId/call/', function (req, res) {
   var agentTwo = 'agent2';
   Call.findOne({agentId: req.params.agentId}, function (err, call) {

@@ -6,12 +6,10 @@ var expect = require('chai').expect
   , cheerio = require('cheerio');
 
 describe('twilio-capability-generator', function () {
-
   describe('#generate', function () {
     it('responds with generated token', function () {
       var token = twilioCapabilityGenerator('agentId');
       expect(token).to.not.be.null;
     });
   });
-
 });
