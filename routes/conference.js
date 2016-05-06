@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express')
   , router = express.Router()
   , twimlGenerator = require('../lib/twiml-generator')
@@ -22,7 +24,7 @@ router.post('/wait/', function (req, res) {
 
 router.post('/:conferenceId/connect/agent1/', function (req, res) {
   res.send(twimlGenerator.connectConferenceTwiml({
-    conferenceId:req.params['conferenceId'],
+    conferenceId:req.params.conferenceId,
     waitUrl: AGENT_WAIT_URL, 
     startConferenceOnEnter: true, 
     endConferenceOnExit: false
@@ -32,7 +34,7 @@ router.post('/:conferenceId/connect/agent1/', function (req, res) {
 
 router.post('/:conferenceId/connect/agent2/', function (req, res) {
   res.send(twimlGenerator.connectConferenceTwiml({
-    conferenceId:req.params['conferenceId'],
+    conferenceId:req.params.conferenceId,
     waitUrl: AGENT_WAIT_URL, 
     startConferenceOnEnter: true, 
     endConferenceOnExit: true
@@ -41,9 +43,9 @@ router.post('/:conferenceId/connect/agent2/', function (req, res) {
 });
 
 router.post('/connect/client/', function (req, res) {
-  var conferenceId = req.body['CallSid'];
-  var agentOne = 'agent1';
-  var callbackUrl = connectConferenceUrl(req, agentOne, conferenceId);
+  var conferenceId = req.body.CallSid
+    , agentOne = 'agent1'
+    , callbackUrl = connectConferenceUrl(req, agentOne, conferenceId);
 
   twilioCaller.call(agentOne, callbackUrl);
 
@@ -71,7 +73,7 @@ router.post('/connect/client/', function (req, res) {
 
 router.post('/:agentId/call/', function (req, res) {
   var agentTwo = 'agent2';
-  Call.findOne({agentId: req.params['agentId']}, function (err, call) {
+  Call.findOne({agentId: req.params.agentId}, function (err, call) {
     var callbackUrl = connectConferenceUrl(req, agentTwo, call.conferenceId);
     twilioCaller.call(agentTwo, callbackUrl);
     res.sendStatus(200);

@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect
   , app = require('../../app.js')
   , twilioCapabilityGenerator = require('../../lib/twilio-capability-generator')

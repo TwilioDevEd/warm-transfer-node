@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect
   , app = require('../../app.js')
   , twimlGenerator = require('../../lib/twiml-generator')
