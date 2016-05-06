@@ -5,5 +5,4 @@ var Call = new mongoose.Schema({
   agentId: String
 });
 
-
-module.exports = mongoose.model('call', Call);;
+module.exports = mongoose.model('call', Call);
