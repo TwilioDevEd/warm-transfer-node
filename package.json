@@ -35,11 +35,11 @@
     "dotenv": "^2.0.0",
     "express": "~4.13.1",
     "express-session": "^1.12.1",
-    "jade": "~1.11.0",
     "kerberos": "~0.0.17",
     "mongoose": "^4.4.14",
     "mongoose-deep-populate": "^2.0.3",
     "morgan": "~1.6.1",
+    "pug": "^2.0.0-alpha6",
     "serve-favicon": "~2.3.0",
     "twilio": "^2.8.0",
     "url": "^0.11.0"
