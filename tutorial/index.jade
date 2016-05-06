@@ -141,8 +141,8 @@
     :markdown
       ## Dial First Agent Into the Call
 
-      For our app we created a `Caller` module to handle dialing our agents. This module uses
-      Twilio's REST API to create a new call. The `create` method
+      For our app we created a `twilio-caller` module to handle dialing our agents. This module uses
+      Twilio's REST API to create a new call. The `call` function
       receives a hash with the following keys:
 
       1. `from`: Your Twilio number
@@ -164,8 +164,8 @@
 
       When the client and the first agent are both in the call we are ready to
       perform a *warm  transfer* to a second agent. The first agent makes a
-      request passing its `identifier` to allow us to look for the `conference_id`
-      needed to dial the second agent in. Since we already have a `Caller` module we can simply use the `call_agent` instance method to connect the second agent.
+      request passing its `identifier` to allow us to look for the `conferenceId`
+      needed to dial the second agent in. Since we already have a `twilio-caller` module we can simply use the `call` function to connect the second agent.
 
   .step(
     data-title='The First Agent Leaves the Call',
