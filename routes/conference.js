@@ -70,7 +70,7 @@ router.post('/connect/client/', function (req, res) {
   .then(function(doc){
     res.type('text/xml');
     res.send(twimlGenerator.connectConferenceTwiml({
-      conferenceId:conferenceId,
+      conferenceId: conferenceId,
       waitUrl: AGENT_WAIT_URL,
       startConferenceOnEnter: false,
       endConferenceOnExit: true
