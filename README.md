@@ -9,22 +9,25 @@
 ## Local development
 
 1. First clone this repository and `cd` into it.
+
    ```bash
    git clone git@github.com:TwilioDevEd/warm-transfer-node.git
    cd warm-transfer-node
    ```
 
-1. Install dependencies:
+1. Install dependencies.
+
   ```bash
   $ npm install
   ```
 
 1. Make sure the tests succeed.
+
   ```bash
   $ npm test
   ```
 
-1. Copy the sample configuration file and edit it to match your configuration
+1. Copy the sample configuration file and edit it to match your configuration.
 
   ```bash
   $ cp .env.example .env
@@ -35,6 +38,7 @@
  You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/user/account/phone-numbers/incoming).
 
 1. Run the application.
+
   ```bash
   $ npm start
   ```
@@ -50,7 +54,9 @@
   ```
 
   Once ngrok is running, open up your browser and go to your ngrok URL. It will
-  look something like this: `http://9a159ccf.ngrok.io`
+  look something like this:
+
+  `http://9a159ccf.ngrok.io`
 
   You can read [this blog post](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html)
   for more details on how to use ngrok.
@@ -75,13 +81,14 @@ That's it!
    **Notes:**
    * Remember to use your SSL enabled ngrok URL `https`.
    Failing to do this won't allow you to receive incoming calls.
+
    * The application has been tested with [Chrome](https://www.google.com/chrome/)
    and [Firefox](https://firefox.com). Safari is not supported at the moment.
 
 1. In one window/tab click `Connect as Agent 1` and in the other one click
    `Connect as Agent 2`. Now both agents are waiting for an incoming call.
 
-1. Dial your [Twilio Number]() to star a call with `Agent 1`. Your `TWILIO_NUMBER`
+1. Dial your [Twilio Number]() to start a call with `Agent 1`. Your `TWILIO_NUMBER`
    environment variable was set when configuring the application to run.
 
 1. When `Agent 1` answers the call from the client, he/she can dial `Agent 2` in
