@@ -36,7 +36,7 @@ router.post('/:conferenceId/connect/agent1/', function (req, res) {
   .toString());
 });
 
-//POST /conference/:conferenceId/connect/agent2/
+// POST /conference/:conferenceId/connect/agent2/
 router.post('/:conferenceId/connect/agent2/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
@@ -48,7 +48,7 @@ router.post('/:conferenceId/connect/agent2/', function (req, res) {
   .toString());
 });
 
-//POST /conference/connect/client/
+// POST /conference/connect/client/
 router.post('/connect/client/', function (req, res) {
   var conferenceId = req.body.CallSid
     , agentOne = 'agent1'
@@ -79,7 +79,7 @@ router.post('/connect/client/', function (req, res) {
   });
 });
 
-//POST /conference/:agentId/call/
+// POST /conference/:agentId/call/
 router.post('/:agentId/call/', function (req, res) {
   var agentTwo = 'agent2';
   Call.findOne({agentId: req.params.agentId}, function (err, call) {
@@ -88,6 +88,5 @@ router.post('/:agentId/call/', function (req, res) {
     res.sendStatus(200);
   });
 });
-
 
 module.exports = router;

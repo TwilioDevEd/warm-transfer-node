@@ -7,8 +7,7 @@ var expect = require('chai').expect
   , Call = require('../../models/call')
   , mongoose = require('mongoose')
   , sinon = require('sinon')
-  , mockery = require('mockery')
-  ;
+  , mockery = require('mockery');
 
 describe('conference route', function () {
 
@@ -164,7 +163,7 @@ describe('conference route', function () {
 
   describe('POST /conference/agent2/call/', function () {
 
-    var twilioCallerMock =  sinon.mock(require('../../lib/twilio-caller'));
+    var twilioCallerMock = sinon.mock(require('../../lib/twilio-caller'));
 
     before(function (done) {
       mockery.enable();
