@@ -28,7 +28,7 @@ router.post('/wait/', function (req, res) {
 router.post('/:conferenceId/connect/agent1/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
-    conferenceId:req.params.conferenceId,
+    conferenceId: req.params.conferenceId,
     waitUrl: AGENT_WAIT_URL,
     startConferenceOnEnter: true,
     endConferenceOnExit: false
