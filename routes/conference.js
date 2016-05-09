@@ -10,7 +10,7 @@ var express = require('express')
 var AGENT_WAIT_URL = 'http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical';
 
 var connectConferenceUrl = function(req, agentId, conferenceId) {
-  var pathname = '/conference/'+conferenceId+'/connect/'+agentId;
+  var pathname = `/conference/${conferenceId}/connect/${agentId}`;
   return url.format({
     protocol: 'https',
     host: req.get('host'),
@@ -40,7 +40,7 @@ router.post('/:conferenceId/connect/agent1/', function (req, res) {
 router.post('/:conferenceId/connect/agent2/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
-    conferenceId:req.params.conferenceId,
+    conferenceId: req.params.conferenceId,
     waitUrl: AGENT_WAIT_URL,
     startConferenceOnEnter: true,
     endConferenceOnExit: true
