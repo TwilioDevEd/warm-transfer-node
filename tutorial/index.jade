@@ -26,7 +26,7 @@
       1. While the first agent is on the phone with the client, he/she can dial a second agent into the call.
 
       1. Once the second agent is on the call, the first one can disconnect from it.
-      The client and the second agent stay on the call.
+         This way the client and the second agent stay on the call.
 
       Let's get started!
 
@@ -60,11 +60,12 @@
       [Twilio's Voice Web Client](//www.twilio.com/webrtc).
 
       We essentially need three things to have a live web client:
+
       * A capability token (provided by our express app)
       * A unique identifier (string) for each agent
       * Event listeners to handle different Twilio-triggered events
 
-      In the next step we'll take a closer look into capability token
+      In the next step we'll take a closer look at capability token
       generation.
 
       ---
@@ -113,8 +114,8 @@
       the first agent, so he can join the same conference.
 
       When providing instructions to the client, we also provide a
-      [`waitUrl`](//www.twilio.com/docs/api/twiml/conference#attributes-waitUrl),
-      which in our case is another endpoint of our application. This returns more TwiML
+      [`waitUrl`](//www.twilio.com/docs/api/twiml/conference#attributes-waitUrl).
+      This URL is another endpoint of our application. This returns more TwiML
       to [say](//www.twilio.com/docs/api/twiml/say) welcome to the user, and also
       [play](//www.twilio.com/docs/api/twiml/play) some music while on hold.
       Take a look at the code
@@ -165,7 +166,8 @@
       When the client and the first agent are both in the call we are ready to
       perform a *warm  transfer* to a second agent. The first agent makes a
       request passing its `identifier` to allow us to look for the `conferenceId`
-      needed to dial the second agent in. Since we already have a `twilio-caller` module we can simply use the `call` function to connect the second agent.
+      needed to dial the second agent in. Since we already have a `twilio-caller`
+      module we can simply use the `call` function to connect the second agent.
 
   .step(
     data-title='The First Agent Leaves the Call',
@@ -176,7 +178,7 @@
 
       When the three participants have joined the same call, the first agent has
       served his purpose. Now he can drop the call, leaving agent two and the client
-      to have a pleasant conversation.
+      having a pleasant conversation.
 
       It is important to notice the differences between the TwiML each one of the
       participants received when joining the call. Both, agent one and two, have
@@ -206,4 +208,4 @@
 
       Thanks for checking out this tutorial! If you have any feedback
       to share with us, we'd love to hear it.
-      [Contact support](//www.twilio.com/help/contact) to let us know what you think.
+      [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
