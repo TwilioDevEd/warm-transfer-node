@@ -10,11 +10,11 @@ var express = require('express')
 var AGENT_WAIT_URL = 'http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical';
 
 var connectConferenceUrl = function(req, agentId, conferenceId) {
-  var pathname = `/conference/${conferenceId}/connect/${agentId}`;
+  var pathName = `/conference/${conferenceId}/connect/${agentId}`;
   return url.format({
     protocol: 'https',
     host: req.get('host'),
-    pathname: pathname
+    pathname: pathName
   });
 };
 
