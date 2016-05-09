@@ -104,7 +104,7 @@ describe('conference route', function () {
 
     });
 
-    it('should persist the call in database', function (done) {
+    it('persists the call in database', function (done) {
       var testApp = supertest(app);
       testApp
       .post('/conference/connect/client')
@@ -120,7 +120,7 @@ describe('conference route', function () {
       });
     });
 
-    it('should not create a new document when call already exists in database', function (done) {
+    it(' does not create a new document when call already exists in database', function (done) {
       Call.create({
         agentId: 'agent1',
         conferenceId: 'conference-id',
@@ -143,7 +143,7 @@ describe('conference route', function () {
       });
     });
 
-    it('should generate twiml response', function (done) {
+    it('generates TwiML response', function (done) {
       var testApp = supertest(app);
       testApp
       .post('/conference/connect/client')
@@ -189,7 +189,7 @@ describe('conference route', function () {
       .then(done);
     });
 
-    it('should make a call', function (done) {
+    it('makes a call', function (done) {
       twilioCallerMock.expects('call').once()
       .withArgs('agent2', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id50\/connect\/agent2/));
 
