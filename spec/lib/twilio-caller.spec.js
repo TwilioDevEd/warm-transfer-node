@@ -31,7 +31,7 @@ describe('twilio-caller', function () {
       done();
     });
 
-    it.only('makes a call', function () {
+    it('makes a call', function () {
       twilioCaller.call('agent3', 'callback-url');
 
       expect(makeCallSpy.calledWith({
