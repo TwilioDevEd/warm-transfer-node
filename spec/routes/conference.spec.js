@@ -35,7 +35,7 @@ describe('conference route', function () {
   });
 
   describe('POST /conference/conference-id1/connect/agent1', function () {
-    it('responds with twiml to connect agent 1', function (done) {
+    it('responds with TwiML to connect agent 1', function (done) {
       var testApp = supertest(app);
       testApp
         .post('/conference/conference-id1/connect/agent1')
@@ -87,7 +87,7 @@ describe('conference route', function () {
       Call.remove({}, done);
     });
 
-    it('should make a call', function (done) {
+    it('makes a call', function (done) {
       twilioCallerMock.expects('call').once().
       withArgs('agent1', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id\/connect\/agent1/));
 

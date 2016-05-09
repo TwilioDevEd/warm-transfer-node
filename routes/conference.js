@@ -18,19 +18,19 @@ var connectConferenceUrl = function(req, agentId, conferenceId) {
   });
 };
 
-//POST /conoference/wait
+// POST /conference/wait
 router.post('/wait/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.waitResponseTwiml().toString());
 });
 
-//POST /conference/:conferenceId/connect/agent1/
+// POST /conference/:conferenceId/connect/agent1/
 router.post('/:conferenceId/connect/agent1/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
     conferenceId:req.params.conferenceId,
-    waitUrl: AGENT_WAIT_URL, 
-    startConferenceOnEnter: true, 
+    waitUrl: AGENT_WAIT_URL,
+    startConferenceOnEnter: true,
     endConferenceOnExit: false
   })
   .toString());

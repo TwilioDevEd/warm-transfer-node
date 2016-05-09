@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 var Call = new mongoose.Schema({
-  conferenceId:   String,
+  conferenceId: String,
   agentId: String
 });
 
