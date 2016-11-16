@@ -1,6 +1,14 @@
-# Warm Transfer: Transfer support calls from one agent to another using Twilio, Node.js and Express
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
+# Warm Transfer
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/warm-transfer-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/warm-transfer-node)
+
+Have you ever been disconnected from a support call while being transferred to another support agent? Warm transfer eliminates this problem. Using Twilio powered warm transfers your agents will have the ability to conference in another agent in realtime.
+
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/warm-transfer/node/express)!
 
 ## Requirements:
 * [Node](http://nodejs.org/)
