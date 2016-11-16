@@ -1,6 +1,14 @@
-# Warm Transfer: Transfer support calls from one agent to another using Twilio, Node.js and Express
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
+# Warm Transfer
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/warm-transfer-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/warm-transfer-node)
+
+Have you ever been disconnected from a support call while being transferred to another support agent? Warm transfer eliminates this problem. Using Twilio powered warm transfers your agents will have the ability to conference in another agent in realtime.
+
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/warm-transfer/node/express)!
 
 ## Requirements:
 * [Node](http://nodejs.org/)
@@ -15,6 +23,16 @@
    cd warm-transfer-node
    ```
 
+1. Copy the sample configuration file and edit it to match your configuration.
+
+   ```bash
+   $ cp .env.example .env
+   ```
+
+  You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
+  [Twilio Account Settings](https://www.twilio.com/user/account/settings).
+  You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/user/account/phone-numbers/incoming).
+
 1. Install dependencies.
 
   ```bash
@@ -27,23 +45,11 @@
   $ npm test
   ```
 
-1. Copy the sample configuration file and edit it to match your configuration.
-
-  ```bash
-  $ cp .env.example .env
-  ```
-
- You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
- [Twilio Account Settings](https://www.twilio.com/user/account/settings).
- You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/user/account/phone-numbers/incoming).
-
 1. Run the application.
 
   ```bash
   $ npm start
   ```
-
-1. Check it out at [http://localhost:3000](http://localhost:3000).
 
 1. Expose your application to the wider internet using [ngrok](http://ngrok.com). This step
   is important because the application won't work as expected if you run it through
@@ -70,6 +76,8 @@
   ```
 
   ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
+
+1. Check it out at [http://localhost:3000](http://localhost:3000).
 
 That's it!
 
