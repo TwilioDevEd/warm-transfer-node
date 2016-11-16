@@ -9,14 +9,17 @@ describe('twilio-caller', function () {
   describe('#call', function () {
     var twilio = require('twilio');
 
-    var twilioStub = function(accountSid, authToken){
-      return new TwilioClientStub();
+    var twilioStub = function(accountSid, authToken) {
+      return {
+        calls:
+          new TwilioClientStub()
+      }
     };
 
     var TwilioClientStub = sinon.stub();
-    var makeCallSpy = sinon.spy();
+    var createSpy = sinon.spy();
 
-    TwilioClientStub.prototype.makeCall = makeCallSpy;
+    TwilioClientStub.prototype.create = createSpy;
 
     before(function (done) {
       mockery.enable();
@@ -34,7 +37,7 @@ describe('twilio-caller', function () {
     it('makes a call to client:agent3', function () {
       twilioCaller.call('agent3', 'callback-url');
 
-      expect(makeCallSpy.calledWith({
+      expect(createSpy.calledWith({
         from: 'my-twilio-number',
         to: 'client:agent3',
         url: 'callback-url'

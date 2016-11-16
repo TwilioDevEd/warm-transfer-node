@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "export NODE_ENV=test && export TWILIO_ACCOUNT_SID=my-account-sid && export TWILIO_AUTH_TOKEN=my-auth-token && export TWILIO_NUMBER=my-twilio-number && mocha spec --recursive"
+    "test": "export TWILIO_ACCOUNT_SID=ACmy-account-sid && export TWILIO_AUTH_TOKEN=my-auth-token && export TWILIO_NUMBER=my-twilio-number && NODE_ENV=test mocha spec --recursive"
   },
   "description": "Warm Transfer: Transfer support calls from one agent to another using Twilio, Node.js and Express",
   "author": {
@@ -41,7 +41,7 @@
     "morgan": "~1.6.1",
     "pug": "^2.0.0-alpha6",
     "serve-favicon": "~2.3.0",
-    "twilio": "^2.8.0",
+    "twilio": "3.0.0-rc.13",
     "url": "^0.11.0"
   },
   "devDependencies": {
