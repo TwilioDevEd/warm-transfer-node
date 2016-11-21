@@ -7,15 +7,15 @@ var expect = require('chai').expect
   , Call = require('../../models/call')
   , mongoose = require('mongoose')
   , sinon = require('sinon')
-  , mockery = require('mockery')
-  ;
+  , mockery = require('mockery');
 
 describe('conference route', function () {
 
   before(function (done) {
     mongoose.connect(require('../../lib/db-connection')(), done);
+    mongoose.Promise = Promise;
   });
-  
+
   after(function (done) {
     mongoose.disconnect(done);
   });
@@ -35,7 +35,7 @@ describe('conference route', function () {
   });
 
   describe('POST /conference/conference-id1/connect/agent1', function () {
-    it('responds with twiml to connect agent 1', function (done) {
+    it('responds with TwiML to connect agent 1', function (done) {
       var testApp = supertest(app);
       testApp
         .post('/conference/conference-id1/connect/agent1')
@@ -68,29 +68,30 @@ describe('conference route', function () {
 
   describe('POST /conference/connect/client/', function () {
 
-    var twilioCallerMock =  sinon.mock(require('../../lib/twilio-caller'));
+    var twilioCallerMock;
 
-    before(function (done) {
+    beforeEach(function (done) {
+      twilioCallerMock =  sinon.mock(require('../../lib/twilio-caller'));
+      var resolvedPromise = new Promise(function(resolve, reject) {
+        resolve();
+      })
+      twilioCallerMock.expects('call').once()
+      .withArgs('agent1', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id\/connect\/agent1/))
+      .returns(resolvedPromise);
       mockery.enable();
       mockery.warnOnUnregistered(false);
       mockery.registerMock('../../lib/twilio-caller', twilioCallerMock);
-      done();
+      Call.remove({}, done);
     });
 
-    after(function (done) {
+    afterEach(function (done) {
+      twilioCallerMock.restore();
       mockery.deregisterMock('../../lib/twilio-caller');
       mockery.disable();
       done();
     });
 
-    beforeEach(function (done) {
-      Call.remove({}, done);
-    });
-
-    it('should make a call', function (done) {
-      twilioCallerMock.expects('call').once().
-      withArgs('agent1', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id\/connect\/agent1/));
-
+    it('makes a call', function (done) {
       var testApp = supertest(app);
       testApp
       .post('/conference/connect/client')
@@ -105,7 +106,7 @@ describe('conference route', function () {
 
     });
 
-    it('should persist the call in database', function (done) {
+    it('persists the call in database', function (done) {
       var testApp = supertest(app);
       testApp
       .post('/conference/connect/client')
@@ -121,7 +122,7 @@ describe('conference route', function () {
       });
     });
 
-    it('should not create a new document when call already exists in database', function (done) {
+    it(' does not create a new document when call already exists in database', function (done) {
       Call.create({
         agentId: 'agent1',
         conferenceId: 'conference-id',
@@ -144,7 +145,7 @@ describe('conference route', function () {
       });
     });
 
-    it('should generate twiml response', function (done) {
+    it('generates TwiML response', function (done) {
       var testApp = supertest(app);
       testApp
       .post('/conference/connect/client')
@@ -164,18 +165,20 @@ describe('conference route', function () {
 
   describe('POST /conference/agent2/call/', function () {
 
-    var twilioCallerMock =  sinon.mock(require('../../lib/twilio-caller'));
+    var twilioCallerMock;
 
-    before(function (done) {
+    beforeEach(function (done) {
+      twilioCallerMock =  sinon.mock(require('../../lib/twilio-caller'));
+      var resolvedPromise = new Promise(function(resolve, reject) {
+        resolve();
+      })
+      twilioCallerMock.expects('call').once()
+      .withArgs('agent2', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id50\/connect\/agent2/))
+      .returns(resolvedPromise);
       mockery.enable();
       mockery.warnOnUnregistered(false);
       mockery.registerMock('../../lib/twilio-caller', twilioCallerMock);
-      done();
-    });
 
-    after(function (done) {
-      mockery.deregisterMock('../../lib/twilio-caller');
-      mockery.disable();
       done();
     });
 
@@ -190,10 +193,14 @@ describe('conference route', function () {
       .then(done);
     });
 
-    it('should make a call', function (done) {
-      twilioCallerMock.expects('call').once()
-      .withArgs('agent2', sinon.match(/https\:\/\/127.0.0.1\:\d+\/conference\/conference-id50\/connect\/agent2/));
+    afterEach(function (done) {
+      twilioCallerMock.restore();
+      mockery.deregisterMock('../../lib/twilio-caller');
+      mockery.disable();
+      done();
+    });
 
+    it('makes a call', function (done) {
       var testApp = supertest(app);
       testApp
       .post('/conference/agent1/call')
