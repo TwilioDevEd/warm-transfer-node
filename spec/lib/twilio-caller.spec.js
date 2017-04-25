@@ -9,12 +9,7 @@ describe('twilio-caller', function () {
   describe('#call', function () {
     var twilio = require('twilio');
 
-    var twilioStub = function(accountSid, authToken) {
-      return {
-        calls:
-          new TwilioClientStub()
-      }
-    };
+    var twilioStub = () => ({ calls: new TwilioClientStub() });
 
     var TwilioClientStub = sinon.stub();
     var createSpy = sinon.spy();
