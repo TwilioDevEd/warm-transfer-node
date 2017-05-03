@@ -10,9 +10,9 @@ describe('twiml-generator', function () {
   describe('#connectConferenceTwiml', function () {
     it('responds with proper twiml', function () {
       var twimlResponse = twimlGenerator.connectConferenceTwiml({
-          conferenceId:'conference-id', 
-          waitUrl: 'wait-url', 
-          startConferenceOnEnter: true, 
+          conferenceId:'conference-id',
+          waitUrl: 'wait-url',
+          startConferenceOnEnter: true,
           endConferenceOnExit: false
       });
       var $ = cheerio.load(twimlResponse.toString());

@@ -41,42 +41,42 @@ router.post('/:conferenceId/connect/agent2/', function (req, res) {
   res.type('text/xml');
   res.send(twimlGenerator.connectConferenceTwiml({
     conferenceId: req.params.conferenceId,
-    waitUrl: AGENT_WAIT_URL, 
-    startConferenceOnEnter: true, 
+    waitUrl: AGENT_WAIT_URL,
+    startConferenceOnEnter: true,
     endConferenceOnExit: true
   })
   .toString());
 });
 
 // POST /conference/connect/client/
-router.post('/connect/client/', function (req, res) {
+router.post('/connect/client/', function(req, res) {
   var conferenceId = req.body.CallSid
     , agentOne = 'agent1'
     , callbackUrl = connectConferenceUrl(req, agentOne, conferenceId);
 
-  twilioCaller.call(agentOne, callbackUrl);
-
-  Call.findOneAndUpdate(
-    {
-      agentId: agentOne
-    },
-    {
-      agentId: agentOne,
-      conferenceId: conferenceId
-    },
-    {
-      upsert: true
-    })
-  .then(function(doc){
-    res.type('text/xml');
-    res.send(twimlGenerator.connectConferenceTwiml({
-      conferenceId: conferenceId,
-      waitUrl: AGENT_WAIT_URL, 
-      startConferenceOnEnter: false,
-      endConferenceOnExit: true
-    })
-    .toString());
-  });
+  twilioCaller.call(agentOne, callbackUrl)
+    .then(function() {
+      return Call.findOneAndUpdate(
+        {
+          agentId: agentOne
+        },
+        {
+          agentId: agentOne,
+          conferenceId: conferenceId
+        },
+        {
+          upsert: true
+        });
+    }).then(function(doc) {
+      res.type('text/xml');
+      res.send(twimlGenerator.connectConferenceTwiml({
+        conferenceId: conferenceId,
+        waitUrl: AGENT_WAIT_URL,
+        startConferenceOnEnter: false,
+        endConferenceOnExit: true
+      })
+      .toString());
+    });
 });
 
 // POST /conference/:agentId/call/
@@ -84,8 +84,10 @@ router.post('/:agentId/call/', function (req, res) {
   var agentTwo = 'agent2';
   Call.findOne({agentId: req.params.agentId}, function (err, call) {
     var callbackUrl = connectConferenceUrl(req, agentTwo, call.conferenceId);
-    twilioCaller.call(agentTwo, callbackUrl);
-    res.sendStatus(200);
+    twilioCaller.call(agentTwo, callbackUrl)
+      .then(function() {
+        res.sendStatus(200);
+      });
   });
 });
 
