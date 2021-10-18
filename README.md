@@ -4,7 +4,7 @@
 
 # Warm Transfer
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/warm-transfer-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/warm-transfer-node)
+[![Node.js CI](https://github.com/TwilioDevEd/warm-transfer-node/actions/workflows/node.js.yml/badge.svg)](https://github.com/TwilioDevEd/warm-transfer-node/actions/workflows/node.js.yml)
 
 Have you ever been disconnected from a support call while being transferred to another support agent? Warm transfer eliminates this problem. Using Twilio powered warm transfers your agents will have the ability to conference in another agent in realtime.
 
