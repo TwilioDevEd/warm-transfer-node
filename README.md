@@ -75,7 +75,7 @@ Have you ever been disconnected from a support call while being transferred to a
     http://<your-ngrok-subdomain>.ngrok.io/conference/connect/client
     ```
 
-    ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
+    [Learn how to configure your Twilio phone number for phone calls](https://www.twilio.com/docs/voice/tutorials/warm-transfer-node-express#set-up-voice-webhook)
 
 1. Check it out at [http://localhost:3000](http://localhost:3000).
 
@@ -96,7 +96,7 @@ Have you ever been disconnected from a support call while being transferred to a
 1. In one window/tab click `Connect as Agent 1` and in the other one click
    `Connect as Agent 2`. Now both agents are waiting for an incoming call.
 
-1. Dial your [Twilio Number]() to start a call with `Agent 1`. Your `TWILIO_NUMBER`
+1. Dial your Twilio Number to start a call with `Agent 1`. Your `TWILIO_NUMBER`
    environment variable was set when configuring the application to run.
 
 1. When `Agent 1` answers the call from the client, he/she can dial `Agent 2` in
