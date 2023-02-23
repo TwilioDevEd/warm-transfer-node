@@ -40,7 +40,7 @@
     "morgan": "~1.6.1",
     "pug": "^2.0.0-alpha6",
     "serve-favicon": "~2.3.0",
-    "twilio": ">=3.0.0-rc.16 < 3.1.0",
+    "twilio": ">=3.0.0-rc.16 < 4.9.0",
     "url": "^0.11.0"
   },
   "devDependencies": {
